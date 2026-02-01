@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /temp/
+Disallow: /junk/
+
+# Hostname and Sitemap
+Sitemap: https://sanjiv-krishna.com/sitemap.xml
