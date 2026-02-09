@@ -1344,20 +1344,23 @@ body.dark-mode .navbar {
 }
 
 .skill-tags span {
-    background: var(--bg-surface);
+    background: rgba(var(--primary-color-rgb, 50, 224, 196), 0.05);
     color: var(--text-main);
-    padding: 5px 12px;
-    border-radius: 10px;
-    font-size: 0.75rem;
-    border: 1px solid var(--border-color);
-    transition: all 0.3s ease;
+    padding: 6px 15px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(50, 224, 196, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(5px);
 }
 
 .skill-tags span:hover {
     background: var(--primary-color);
-    color: #121212;
+    color: #000;
     border-color: var(--primary-color);
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(50, 224, 196, 0.3);
 }
 
 .hobbies-icons {
@@ -2002,6 +2005,20 @@ body:not(.dark-mode) .lang-bubble:hover {
 .contact-form textarea:focus {
     outline: none;
     border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(50, 224, 196, 0.2);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.contact-form input:focus::placeholder,
+.contact-form textarea:focus::placeholder {
+    opacity: 0.3;
+    transform: translateX(5px);
 }
 
 .submit-btn {
@@ -2413,11 +2430,29 @@ footer {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(50, 224, 196, 0.1);
+    background: rgba(50, 224, 196, 0.05);
     border: 1px solid rgba(50, 224, 196, 0.2);
-    padding: 6px 14px;
-    border-radius: 20px;
+    padding: 8px 18px;
+    border-radius: 30px;
     font-size: 0.85rem;
+    font-weight: 600;
     color: var(--primary-color);
-    margin-top: 15px;
+    margin-top: 20px;
+    box-shadow: 0 0 15px rgba(50, 224, 196, 0.1);
+    animation: badge-pulse 2s infinite ease-in-out;
+}
+
+@keyframes badge-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(50, 224, 196, 0.2);
+    }
 }

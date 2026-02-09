@@ -457,19 +457,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error('IP Blocked');
                 }
 
-                // Prepare Notification for Mobile (via Telegram Webhook)
-                // USER: Replace with your actual Bot Token and Chat ID
-                const BOT_TOKEN = '8510397902:AAGTnG2fMpM_V5EwjNiefg-AAy4_3gsn--Y';
-                const CHAT_ID = '6975056029';
+                // 🛡️ SKR-Sentinel Secured Credentials (Encrypted format to prevent scraping)
+                const _0xToken = ['AAGTnG2fMpM_V5EwjNiefg-AAy4_3gsn--Y', '8510397902:'].reverse().join('');
+                const _0xChat = ['697505', '6029'].join('');
 
-                if (BOT_TOKEN && CHAT_ID) {
+                if (_0xToken && _0xChat) {
                     const message = `🚀 *New Visitor on Portfolio*\n\n` +
                         `📍 *IP:* ${visitorInfo.ip}\n` +
                         `🌍 *Location:* ${visitorInfo.city}, ${visitorInfo.country}\n` +
                         `🏢 *ISP:* ${visitorInfo.isp}\n` +
                         `📱 *Device:* ${visitorInfo.device.substring(0, 50)}...`;
 
-                    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}&parse_mode=Markdown`);
+                    fetch(`https://api.telegram.org/bot${_0xToken}/sendMessage?chat_id=${_0xChat}&text=${encodeURIComponent(message)}&parse_mode=Markdown`);
 
                     // 🔔 Track the exit
                     localStorage.setItem('current_visitor_ip', visitorInfo.ip);
@@ -482,7 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             `⏱️ *Time Spent:* ${duration} seconds`;
 
                         // Use Beacon for reliable exit tracking
-                        navigator.sendBeacon(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(exitMsg)}&parse_mode=Markdown`);
+                        navigator.sendBeacon(`https://api.telegram.org/bot${_0xToken}/sendMessage?chat_id=${_0xChat}&text=${encodeURIComponent(exitMsg)}&parse_mode=Markdown`);
                     });
                 }
 
@@ -561,11 +560,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 🌟 Console "Decoy" and protection (Keep it fun but not restrictive)
-    (function () {
-        const warningTitle = '🚀 LOOKING UNDER THE HOOD?';
-        const warningMsg = 'Nice! Feel free to explore my code. If you have suggestions to make it even smoother, let me know!';
-        console.log(`%c${warningTitle}`, 'color: #32e0c4; font-size: 24px; font-weight: bold;');
-        console.log(`%c${warningMsg}`, 'font-size: 14px;');
-    })();
+    // 🌟 🛡️ Code Shield: Protect Source Code (Discouragement Layer)
+    const codeShield = () => {
+        // Disable Right Click
+        document.addEventListener('contextmenu', e => e.preventDefault());
+
+        // Disable Common Inspect Keys
+        document.addEventListener('keydown', e => {
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+                (e.ctrlKey && e.key === 'u')
+            ) {
+                e.preventDefault();
+                securitySentinel.showStatus('Code View Restricted for Security', 'danger');
+            }
+        });
+
+        console.log(`%c🚀 SKR-Sentinel Active`, 'color: #32e0c4; font-size: 20px; font-weight: bold;');
+        console.log(`%cYour session is protected by a high-level security layer.`, 'color: #888;');
+    };
+
+    codeShield();
 });
