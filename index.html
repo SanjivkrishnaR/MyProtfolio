@@ -57,6 +57,8 @@
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
+
+
     <!-- Next-Level Cinematic Intro -->
     <div id="intro-loader">
         <div class="intro-particles">
@@ -86,7 +88,7 @@
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
             <div class="logo">
-                <a href="#home">SK<span>.</span></a>
+                <a href="#home">SK</a>
             </div>
 
             <button class="menu-btn" id="menu-toggle" aria-label="Toggle navigation">
@@ -113,8 +115,9 @@
             <div class="hero-bg-overlay"></div>
             <div class="container hero-container">
                 <div class="hero-content fade-in-up">
-                    <div class="profile-frame">
-                        <img src="sk-logo-gold.png" alt="Sanjiv Krishna R - Gold Logo" class="hero-logo glow-effect" />
+                    <div class="sk-logo-container">
+                        <div class="premium-sk">SK</div>
+                        <div class="logo-reflection"></div>
                     </div>
 
                     <h1 class="glitch-text" data-text="Welcome To My Portfolio 🚀">Welcome To My Portfolio </h1>
@@ -141,9 +144,7 @@
         <!-- About Section -->
         <section id="about" class="section about-section">
             <div class="container">
-                <h2 class="section-title">About Me</h2>
-
-                <div class="about-grid">
+                <div class="about-flex">
                     <div class="about-image-wrapper reveal-left">
                         <div class="image-container">
                             <img src="WhatsApp Image 2026-01-31 at 10.06.33 AM.jpeg" alt="Portrait of Sanjiv Krishna R"
@@ -158,6 +159,7 @@
                     </div>
 
                     <div class="about-text-wrapper reveal-right">
+                        <h2 class="section-title">About Me</h2>
                         <p class="bio-text">
                             I’m <strong>Sanjiv Krishna R</strong>, an Electronics and Communication Engineering student
                             with a strong foundation in
@@ -172,71 +174,70 @@
                             <span class="tech-highlight">communication technologies</span>.
                             I enjoy problem-solving and building practical, real-world solutions through effective
                             system design.
-
                         </p>
+                    </div>
+                </div>
 
-                        <div class="info-grid">
-                            <div class="info-card edu-card">
-                                <h3><i class="fas fa-graduation-cap"></i> Education </h3>
-                                <ul>
-                                    <li>
-                                        <strong>B.E. Electronics and Communication</strong>
-                                        KPR Institute of Engineering and Technology<br>
-                                        <span class="edu-meta">2023 – 2027 · CGPA: 7.3</span>
-                                    </li>
-                                    <li>
-                                        <strong>Higher Secondary (12th)</strong>
-                                        Chinmaya Vidyalaya Attukal, Kerala<br>
-                                        <span class="edu-meta">2021 – 2022 · 73%</span>
-                                    </li>
-                                    <li>
-                                        <strong>Secondary School (10th)</strong>
-                                        Chinmaya Vidyalaya Attukal, Kerala<br>
-                                        <span class="edu-meta">2020 – 2021 · 70%</span>
-                                    </li>
-                                </ul>
-                            </div>
+                <div class="info-grid reveal-up">
+                    <div class="info-card edu-card">
+                        <h3><i class="fas fa-graduation-cap"></i> Education </h3>
+                        <ul>
+                            <li>
+                                <strong>B.E. Electronics and Communication</strong>
+                                KPR Institute of Engineering and Technology, Coimbatore TamilNadu<br>
+                                <span class="edu-meta">2023 – 2027 | CGPA: 7.3 | </span>
+                            </li>
+                            <li>
+                                <strong>HSLC - 12th</strong>
+                                Chinmaya Vidyalaya Attukal, Thiruvananthapuram ,Kerala<br>
+                                <span class="edu-meta">2021 – 2022 | 73%</span>
+                            </li>
+                            <li>
+                                <strong>SSLC - 10th</strong>
+                                Chinmaya Vidyalaya Attukal, Thiruvananthapuram ,Kerala<br>
+                                <span class="edu-meta">2020 – 2021 | 70%</span>
+                            </li>
+                        </ul>
+                    </div>
 
-                            <div class="info-card skills-card">
-                                <h3><i class="fas fa-code"></i> Skills</h3>
-                                <div class="skill-tags">
-                                    <span>Git/GitHub</span>
-                                    <span>Java</span>
-                                    <span>Python</span>
-                                    <span>HTML</span>
-                                    <span>CSS</span>
-                                    <span>VLSI</span>
-                                    <span>MY-SQL</span>
-                                    <span>Networking-basics</span>
-                                </div>
-                            </div>
+                    <div class="info-card skills-card">
+                        <h3><i class="fas fa-code"></i> Skills</h3>
+                        <div class="skill-tags">
+                            <span>Git/GitHub</span>
+                            <span>Java</span>
+                            <span>Python</span>
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>VLSI</span>
+                            <span>MY-SQL</span>
+                            <span>Networking-basics</span>
+                        </div>
+                    </div>
 
-                            <div class="info-card cert-card" id="cert-box">
-                                <h3><i class="fas fa-certificate"></i> Certifications</h3>
-                                <ul class="cert-list">
-                                    <li class="cert-item" data-cert="certs/data-structure.jpg">Data Structure in C</li>
-                                    <li class="cert-item" data-cert="certs/industry-4.jpg">Industrial 4.0 & IIoT</li>
-                                    <li class="cert-item" data-cert="certs/micro-sensors.jpg">Microsensors & Nanosensors
-                                    </li>
-                                    <li class="cert-item" data-cert="certs/hackerrank-java.jpg">HackerRank Java Basics
-                                    </li>
-                                    <li class="cert-item" data-cert="certs/excel-coursera.jpg">Microsoft Excel
-                                        (Coursera)</li>
-                                    <li class="cert-item" data-cert="certs/sql-db.jpg">SQL & Database Design</li>
-                                    <li class="cert-item" data-cert="certs/matlab.jpg">MATLAB & Simulink</li>
-                                    <li class="cert-item" data-cert="certs/vlsi.jpg">VLSI (Maven Silicon)</li>
-                                </ul>
-                            </div>
+                    <div class="info-card cert-card" id="cert-box">
+                        <h3><i class="fas fa-certificate"></i> Certifications</h3>
+                        <ul class="cert-list">
+                            <li class="cert-item" data-cert="certs/data-structure.jpg">Data Structure in C</li>
+                            <li class="cert-item" data-cert="certs/industry-4.jpg">Industrial 4.0 & IIoT</li>
+                            <li class="cert-item" data-cert="certs/micro-sensors.jpg">Microsensors & Nanosensors
+                            </li>
+                            <li class="cert-item" data-cert="certs/hackerrank-java.jpg">HackerRank Java Basics
+                            </li>
+                            <li class="cert-item" data-cert="certs/excel-coursera.jpg">Microsoft Excel
+                                (Coursera)</li>
+                            <li class="cert-item" data-cert="certs/sql-db.jpg">SQL & Database Design</li>
+                            <li class="cert-item" data-cert="certs/matlab.jpg">MATLAB & Simulink</li>
+                            <li class="cert-item" data-cert="certs/vlsi.jpg">VLSI (Maven Silicon)</li>
+                        </ul>
+                    </div>
 
-                            <div class="info-card hobbies-card">
-                                <h3><i class="fas fa-heart"></i> Hobbies</h3>
-                                <div class="hobbies-icons">
-                                    <i class="fas fa-film" title="Movies"></i>
-                                    <i class="fas fa-gamepad" title="Gaming"></i>
-                                    <i class="fas fa-video" title="Editing"></i>
-                                    <i class="fas fa-laptop-code" title="Web Dev"></i>
-                                </div>
-                            </div>
+                    <div class="info-card hobbies-card">
+                        <h3><i class="fas fa-heart"></i> Hobbies</h3>
+                        <div class="hobbies-icons">
+                            <i class="fas fa-film" title="Movies"></i>
+                            <i class="fas fa-gamepad" title="Gaming"></i>
+                            <i class="fas fa-video" title="Editing"></i>
+                            <i class="fas fa-laptop-code" title="Web Dev"></i>
                         </div>
                     </div>
                 </div>

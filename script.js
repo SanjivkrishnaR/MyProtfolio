@@ -316,6 +316,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealOnScroll.observe(el));
 
+    // 🌟 Scroll Spy for Active Nav Links
+    const sections = document.querySelectorAll('section, header');
+    const navItemsSpy = document.querySelectorAll('.nav-link');
+
+    const scrollSpyOptions = { threshold: 0.5 };
+    const scrollSpyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navItemsSpy.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, scrollSpyOptions);
+
+    sections.forEach(section => scrollSpyObserver.observe(section));
+
     // 🌟 Unified Media Modal Logic with Gallery Support
     const modal = document.getElementById('cert-modal');
     const modalImg = document.getElementById('modal-img');
@@ -582,4 +603,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     codeShield();
+
+
 });
+
