@@ -267,7 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 🌟 Typing Effect
     const typingTextElement = document.querySelector('.typing-text');
-    const textArray = ["FRONT-END DEVELOPER", "UI/UX ENTHUSIAST", "ECE STUDENT"];
+    const textArray = ["Design with Purpose.", "Develop with Precision."];
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
