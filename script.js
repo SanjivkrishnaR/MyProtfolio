@@ -602,6 +602,17 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(`%cYour session is protected by a high-level security layer.`, 'color: #888;');
     };
 
+    // 📈 Scroll Progress Bar Logic
+    const scrollBar = document.getElementById('scrollBar');
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        if (scrollBar) {
+            scrollBar.style.width = scrolled + "%";
+        }
+    });
+
     codeShield();
 
 

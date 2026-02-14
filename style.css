@@ -2608,3 +2608,137 @@ footer {
         box-shadow: 0 0 20px rgba(50, 224, 196, 0.2);
     }
 }
+
+/* ========================= */
+/* 📈 Scroll Progress Bar */
+/* ========================= */
+.scroll-progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: transparent;
+    z-index: 10002;
+    pointer-events: none;
+}
+
+.scroll-progress-bar {
+    height: 100%;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
+    width: 0%;
+    box-shadow: 0 0 10px var(--primary-color);
+    transition: width 0.1s ease-out;
+}
+
+/* ========================= */
+/* 🏆 Achievements Section */
+/* ========================= */
+.achievements-section {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+body.dark-mode .achievements-section {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+body.light-mode .achievements-section {
+    background: rgba(0, 0, 0, 0.01);
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.achievement-card {
+    background: var(--bg-card);
+    padding: 40px 30px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.achievement-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+    z-index: 0;
+    opacity: 0.1;
+}
+
+.achievement-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-glow);
+    border-color: var(--primary-color);
+}
+
+.achievement-card:hover::before {
+    width: 100%;
+    opacity: 0.05;
+}
+
+.achievement-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    flex-shrink: 0;
+    z-index: 1;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 5px rgba(50, 224, 196, 0.3));
+}
+
+.achievement-info {
+    z-index: 1;
+}
+
+.achievement-date {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.achievement-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: var(--text-main);
+}
+
+.achievement-info p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+body.light-mode #achievements .section-title {
+    color: #e67e22;
+    /* Warm Gold for Achievements in Light Mode */
+}
+
+@media (max-width: 600px) {
+    .achievement-card {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        gap: 15px;
+    }
+}
