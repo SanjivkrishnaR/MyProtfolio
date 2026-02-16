@@ -383,8 +383,12 @@ document.addEventListener('DOMContentLoaded', () => {
     interactiveItems.forEach(item => {
         item.addEventListener('click', (e) => {
             e.stopPropagation();
+
+            // 🛑 Prevent Opening Media Modal if it's the Cert Box Trigger
+            if (item.id === 'cert-box') return;
+
             const srcList = item.getAttribute('data-src-list');
-            const singleSrc = item.getAttribute('data-src') || item.getAttribute('data-cert');
+            const singleSrc = item.getAttribute('data-src') || item.getAttribute('data-cert') || item.getAttribute('data-full-img');
 
             if (srcList) currentMediaList = srcList.split(',');
             else if (singleSrc) currentMediaList = [singleSrc];
@@ -392,10 +396,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
             currentIndex = 0;
             modal.style.display = "block";
-            modalTitle.textContent = item.querySelector('h3') ? item.querySelector('h3').textContent : item.textContent;
+            modalTitle.textContent = item.querySelector('h3') ? item.querySelector('h3').textContent : (item.querySelector('p') ? item.querySelector('p').textContent : item.textContent);
             document.body.style.overflow = 'hidden';
             updateModalMedia();
         });
+    });
+
+    // 🌟 Certifications Gallery Modal Logic
+    const certBox = document.getElementById('cert-box');
+    const certGalleryModal = document.getElementById('cert-gallery-modal');
+    const closeGalleryBtn = document.querySelector('.close-gallery');
+
+    if (certBox && certGalleryModal) {
+        certBox.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent bubbling layout issues
+            certGalleryModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
+    if (closeGalleryBtn) {
+        closeGalleryBtn.addEventListener('click', () => {
+            certGalleryModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    window.addEventListener('click', (e) => {
+        if (e.target == certGalleryModal) {
+            certGalleryModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     });
 
     if (prevBtn) prevBtn.addEventListener('click', () => {
@@ -566,6 +597,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         formStatus.style.color = "var(--primary-color)";
                         contactForm.reset();
                         securitySentinel.showStatus('Transmission Successful', 'success');
+
+                        // 🎊 Satisfying Confetti Explosion!
+                        if (window.confetti) {
+                            confetti({
+                                particleCount: 150,
+                                spread: 70,
+                                origin: { y: 0.6 },
+                                colors: ['#32e0c4', '#3edbf0', '#ffffff'] // Theme colors
+                            });
+                        }
+
+                        // Change button to success state temporarily
+                        btnSpan.textContent = "Sent Successfully! 🚀";
+                        submitBtnElement.style.background = "var(--primary-color)";
+                        submitBtnElement.style.borderColor = "var(--primary-color)";
                     } else {
                         throw new Error('Transmission Failed');
                     }
@@ -573,9 +619,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     formStatus.textContent = "Transmission failed. Error: " + error.message;
                     formStatus.style.color = "#ff4444";
                     securitySentinel.showStatus('Transmission Error', 'danger');
+                    btnSpan.textContent = "Failed. Retry?";
                 }).finally(() => {
-                    btnSpan.textContent = originalText;
-                    submitBtnElement.disabled = false;
+                    setTimeout(() => {
+                        btnSpan.textContent = originalText;
+                        submitBtnElement.disabled = false;
+                        submitBtnElement.style.background = ""; // Reset to gradient
+                    }, 4000);
                 });
             }
         });
@@ -615,6 +665,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     codeShield();
 
+    // 🩹 Compatibility Helper: Define openFullImage to prevent errors from static HTML onclicks
+    // The actual logic is handled by the event listeners above.
+    window.openFullImage = function (src, title) {
+        console.log('Opening via legacy onclick (handled by listener):', title);
+    };
+
+    // 🌟 Info Grid Horizontal Scroll (Desktop)
+    const infoScrollContainer = document.getElementById('infoGrid');
+    const btnScrollLeft = document.getElementById('infoScrollLeft');
+    const btnScrollRight = document.getElementById('infoScrollRight');
+
+    if (infoScrollContainer && btnScrollLeft && btnScrollRight) {
+        btnScrollLeft.addEventListener('click', () => {
+            // Scroll amount matches card width + gap approx
+            infoScrollContainer.scrollBy({ left: -350, behavior: 'smooth' });
+        });
+
+        btnScrollRight.addEventListener('click', () => {
+            infoScrollContainer.scrollBy({ left: 350, behavior: 'smooth' });
+        });
+    }
 
 });
 

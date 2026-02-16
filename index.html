@@ -109,7 +109,7 @@
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#internship" class="nav-link">Internship</a></li>
-                <li><a href="#achievements" class="nav-link">Achievements & Awards</a></li>
+
                 <li><a href="#contact" class="nav-link">Contact</a></li>
                 <li><a href="SANJIV KRISHNA R Resume.pdf" class="nav-link resume-nav-btn" target="_blank"><i
                             class="fas fa-file-download"></i> Resume</a></li>
@@ -187,68 +187,87 @@
                     </div>
                 </div>
 
-                <div class="info-grid reveal-up">
-                    <div class="info-card edu-card">
-                        <h3><i class="fas fa-graduation-cap"></i> Education </h3>
-                        <ul>
-                            <li>
-                                <strong>B.E. Electronics and Communication</strong>
-                                KPR Institute of Engineering and Technology, Coimbatore TamilNadu<br>
-                                <span class="edu-meta">2023 – 2027 | CGPA: 7.3 | </span>
-                            </li>
-                            <li>
-                                <strong>HSLC - 12th</strong>
-                                Chinmaya Vidyalaya Attukal, Thiruvananthapuram ,Kerala<br>
-                                <span class="edu-meta">2021 – 2022 | 73%</span>
-                            </li>
-                            <li>
-                                <strong>SSLC - 10th</strong>
-                                Chinmaya Vidyalaya Attukal, Thiruvananthapuram ,Kerala<br>
-                                <span class="edu-meta">2020 – 2021 | 70%</span>
-                            </li>
-                        </ul>
-                    </div>
+                <!-- Scroll Wrapper for Desktop -->
+                <div class="info-scroll-container">
+                    <button class="scroll-btn prev-btn" id="infoScrollLeft"><i class="fas fa-chevron-left"></i></button>
 
-                    <div class="info-card skills-card">
-                        <h3><i class="fas fa-code"></i> Skills</h3>
-                        <div class="skill-tags">
-                            <span>Git/GitHub</span>
-                            <span>Java</span>
-                            <span>Python</span>
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>VLSI</span>
-                            <span>MY-SQL</span>
-                            <span>Networking-basics</span>
+                    <div class="info-grid reveal-up" id="infoGrid">
+                        <!-- 1. Education -->
+                        <div class="info-card edu-card">
+                            <h3><i class="fas fa-graduation-cap"></i> Education </h3>
+                            <ul>
+                                <li>
+                                    <strong>B.E. Electronics and Communication</strong>
+                                    KPR Institute of Engineering and Technology, Coimbatore TamilNadu<br>
+                                    <span class="edu-meta">2023 – 2027 | CGPA: 7.3 | </span>
+                                </li>
+                                <li>5
+                                    <strong>HSLC - 12th</strong>
+                                    Chinmaya Vidyalaya Attukal, Thiruvananthapuram ,Kerala<br>
+                                    <span class="edu-meta">2021 – 2022 | 73%</span>
+                                </li>
+                                <li>
+                                    <strong>SSLC - 10th</strong>
+                                    Chinmaya Vidyalaya Attukal, Thiruvananthapuram ,Kerala<br>
+                                    <span class="edu-meta">2020 – 2021 | 70%</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 2. Certifications -->
+                        <div class="info-card cert-card interactive-card" id="cert-box">
+                            <h3><i class="fas fa-certificate"></i> Certifications</h3>
+                            <p class="cert-preview-text">View all my professional certifications and achievements.</p>
+                            <button class="view-gallery-btn">Open Gallery <i
+                                    class="fas fa-external-link-alt"></i></button>
+                        </div>
+
+                        <!-- 3. Skills -->
+                        <div class="info-card skills-card">
+                            <h3><i class="fas fa-code"></i> Skills</h3>
+                            <div class="skill-tags">
+                                <span>Git/GitHub</span>
+                                <span>Java</span>
+                                <span>Python</span>
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>VLSI</span>
+                                <span>MY-SQL</span>
+                                <span>Networking-basics</span>
+                            </div>
+                        </div>
+
+                        <!-- 4. Participation & Achievements (Moved) -->
+                        <div class="info-card achievements-card">
+                            <h3><i class="fas fa-trophy"></i> Participation & Achievements</h3>
+                            <ul class="achieve-list">
+                                <li>
+                                    <strong>VARNAM ’25</strong>
+                                    Paper Presentation - KCT, Coimbatore
+                                    <span class="edu-meta">2025</span>
+                                </li>
+                                <li>
+                                    <strong>RIONZ ’25</strong>
+                                    Paper Presentation - RVS College, Coimbatore
+                                    <span class="edu-meta">2025</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 5. Hobbies -->
+                        <div class="info-card hobbies-card">
+                            <h3><i class="fas fa-heart"></i> Hobbies</h3>
+                            <div class="hobbies-icons">
+                                <i class="fas fa-film" title="Movies"></i>
+                                <i class="fas fa-gamepad" title="Gaming"></i>
+                                <i class="fas fa-video" title="Editing"></i>
+                                <i class="fas fa-laptop-code" title="Web Dev"></i>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="info-card cert-card" id="cert-box">
-                        <h3><i class="fas fa-certificate"></i> Certifications</h3>
-                        <ul class="cert-list">
-                            <li class="cert-item" data-cert="certs/data-structure.jpg">Data Structure in C</li>
-                            <li class="cert-item" data-cert="certs/industry-4.jpg">Industrial 4.0 & IIoT</li>
-                            <li class="cert-item" data-cert="certs/micro-sensors.jpg">Microsensors & Nanosensors
-                            </li>
-                            <li class="cert-item" data-cert="certs/hackerrank-java.jpg">HackerRank Java Basics
-                            </li>
-                            <li class="cert-item" data-cert="certs/excel-coursera.jpg">Microsoft Excel
-                                (Coursera)</li>
-                            <li class="cert-item" data-cert="certs/sql-db.jpg">SQL & Database Design</li>
-                            <li class="cert-item" data-cert="certs/matlab.jpg">MATLAB & Simulink</li>
-                            <li class="cert-item" data-cert="certs/vlsi.jpg">VLSI (Maven Silicon)</li>
-                        </ul>
-                    </div>
-
-                    <div class="info-card hobbies-card">
-                        <h3><i class="fas fa-heart"></i> Hobbies</h3>
-                        <div class="hobbies-icons">
-                            <i class="fas fa-film" title="Movies"></i>
-                            <i class="fas fa-gamepad" title="Gaming"></i>
-                            <i class="fas fa-video" title="Editing"></i>
-                            <i class="fas fa-laptop-code" title="Web Dev"></i>
-                        </div>
-                    </div>
+                    <button class="scroll-btn next-btn" id="infoScrollRight"><i
+                            class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
         </section>
@@ -440,42 +459,7 @@
         </section>
 
         <!-- Achievements & Awards Section -->
-        <section id="achievements" class="section achievements-section">
-            <div class="container">
-                <h2 class="section-title">participation,Achievements & Awards</h2>
-                <p class="section-subtitle">Academic Excellence & Technical Participations</p>
 
-                <div class="achievements-grid">
-                    <!-- Achievement 1: VARNAM '25 -->
-                    <div class="achievement-card reveal-up">
-                        <div class="achievement-icon">
-                            <i class="fas fa-file-powerpoint"></i>
-                        </div>
-                        <div class="achievement-info">
-                            <span class="achievement-date">2025</span>
-                            <h3>VARNAM ’25</h3>
-                            <p>Participated in Paper Presentation at Kumaraguru College of Technology (KCT), Coimbatore.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Achievement 2: RIONZ '25 -->
-                    <div class="achievement-card reveal-up" style="transition-delay: 0.2s">
-                        <div class="achievement-icon">
-                            <i class="fas fa-file-powerpoint"></i>
-                        </div>
-                        <div class="achievement-info">
-                            <span class="achievement-date">2025</span>
-                            <h3>RIONZ ’25</h3>
-                            <p>Participated in Paper Presentation at RVS College of Engineering and Technology,
-                                Coimbatore.</p>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </section>
 
         <!-- Contact Section -->
         <section id="contact" class="section contact-section">
@@ -518,27 +502,23 @@
 
                             <div class="form-row">
                                 <div class="form-group">
+                                    <input type="text" id="firstName" name="firstName" placeholder=" " required />
                                     <label for="firstName">First Name</label>
-                                    <input type="text" id="firstName" name="firstName" placeholder="Enter the name "
-                                        required />
                                 </div>
                                 <div class="form-group">
+                                    <input type="text" id="lastName" name="lastName" placeholder=" " required />
                                     <label for="lastName">Last Name</label>
-                                    <input type="text" id="lastName" name="lastName" placeholder="Enter the last name "
-                                        required />
                                 </div>
                             </div>
 
                             <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder=" " required />
                                 <label for="email">Email Address</label>
-                                <input type="email" id="email" name="email" placeholder="Enter your Email Address"
-                                    required />
                             </div>
 
                             <div class="form-group">
+                                <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
                                 <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="5" placeholder="Your message"
-                                    required></textarea>
                             </div>
 
                             <button type="submit" class="submit-btn">
@@ -564,6 +544,7 @@
     </footer>
 
     <!-- Certification Modal -->
+    <!-- Single Media Modal (Kept for other uses) -->
     <div id="cert-modal" class="modal">
         <div class="modal-content animate-zoom">
             <span class="close-modal">&times;</span>
@@ -583,6 +564,83 @@
             </div>
         </div>
     </div>
+
+    <!-- NEW: Certifications Gallery Modal -->
+    <div id="cert-gallery-modal" class="modal cert-gallery-modal">
+        <div class="modal-content gallery-content animate-zoom">
+            <span class="close-modal close-gallery">&times;</span>
+            <h2>My Certifications Gallery</h2>
+            <div class="gallery-grid">
+                <!-- Data Structure -->
+                <div class="gallery-item interactive-card" data-full-img="certs/data-structure.jpg"
+                    onclick="openFullImage('certs/data-structure.jpg', 'Data Structure in C')">
+                    <img src="certs/data-structure.jpg" alt="Data Structure" loading="lazy">
+                    <p>Data Structure in C</p>
+                </div>
+
+                <!-- Industry 4.0 -->
+                <div class="gallery-item interactive-card" data-full-img="certs/industry-4.jpg"
+                    onclick="openFullImage('certs/industry-4.jpg', 'Industrial 4.0 & IIoT')">
+                    <img src="certs/industry-4.jpg" alt="Industry 4.0" loading="lazy">
+                    <p>Industrial 4.0 & IIoT</p>
+                </div>
+
+                <!-- Microsensors -->
+                <div class="gallery-item interactive-card" data-full-img="certs/micro-sensors.jpg"
+                    onclick="openFullImage('certs/micro-sensors.jpg', 'Microsensors & Nanosensors')">
+                    <img src="certs/micro-sensors.jpg" alt="Microsensors" loading="lazy">
+                    <p>Microsensors & Nanosensors</p>
+                </div>
+
+                <!-- HackerRank Java -->
+                <div class="gallery-item interactive-card" data-full-img="certs/hackerrank-java.jpg"
+                    onclick="openFullImage('certs/hackerrank-java.jpg', 'HackerRank Java Basics')">
+                    <img src="certs/hackerrank-java.jpg" alt="Java Basics" loading="lazy">
+                    <p>HackerRank Java Basics</p>
+                </div>
+
+                <!-- Excel -->
+                <div class="gallery-item interactive-card" data-full-img="certs/excel-coursera.jpg"
+                    onclick="openFullImage('certs/excel-coursera.jpg', 'Microsoft Excel (Coursera)')">
+                    <img src="certs/excel-coursera.jpg" alt="Excel" loading="lazy">
+                    <p>Microsoft Excel</p>
+                </div>
+
+                <!-- SQL -->
+                <div class="gallery-item interactive-card" data-full-img="certs/sql-db.jpg"
+                    onclick="openFullImage('certs/sql-db.jpg', 'SQL & Database Design')">
+                    <img src="certs/sql-db.jpg" alt="SQL" loading="lazy">
+                    <p>SQL & Database Design</p>
+                </div>
+
+                <!-- MATLAB -->
+                <div class="gallery-item interactive-card" data-full-img="certs/matlab.jpg"
+                    onclick="openFullImage('certs/matlab.jpg', 'MATLAB & Simulink')">
+                    <img src="certs/matlab.jpg" alt="MATLAB" loading="lazy">
+                    <p>MATLAB & Simulink</p>
+                </div>
+
+                <!-- VLSI -->
+                <div class="gallery-item interactive-card" data-full-img="certs/vlsi.jpg"
+                    onclick="openFullImage('certs/vlsi.jpg', 'VLSI (Maven Silicon)')">
+                    <img src="certs/vlsi.jpg" alt="VLSI" loading="lazy">
+                    <p>VLSI (Maven Silicon)</p>
+                </div>
+
+                <!-- Add More Placeholder -->
+                <div class="gallery-item add-new-cert">
+                    <div class="add-icon">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <p>Add More Certificate</p>
+                    <!-- User requested: "add more certficate in each certificates with there name down.. " actually maybe they mean inside the gallery view. "inside there is add more certficate" -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Canvas Confetti (For Satisfaction!) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
     <!-- Lottie Animation Player -->
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
