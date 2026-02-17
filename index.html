@@ -553,7 +553,13 @@
                 <div class="media-container-wrapper">
                     <button id="prev-btn" class="nav-btn"><i class="fas fa-chevron-left"></i></button>
                     <div class="media-viewer">
+                        <div id="modal-loader" class="modal-loader">
+                            <div class="spinner"></div>
+                            <p>Loading Asset...</p>
+                        </div>
                         <img id="modal-img" src="" alt="Gallery Image" style="display:none;" />
+                        <iframe id="modal-pdf" src=""
+                            style="display:none; width:100%; height:80vh; border:none;"></iframe>
                         <video id="modal-video" controls style="display:none; width:100%; max-height:70vh;">
                             Your browser does not support the video tag.
                         </video>
@@ -571,60 +577,93 @@
             <span class="close-modal close-gallery">&times;</span>
             <h2>My Certifications Gallery</h2>
             <div class="gallery-grid">
-                <!-- Data Structure -->
-                <div class="gallery-item interactive-card" data-full-img="certs/data-structure.jpg"
-                    onclick="openFullImage('certs/data-structure.jpg', 'Data Structure in C')">
-                    <img src="certs/data-structure.jpg" alt="Data Structure" loading="lazy">
-                    <p>Data Structure in C</p>
+                <!-- Gemini Google Certified -->
+                <div class="gallery-item interactive-card" data-full-img="certs/Gemini Google certified.pdf"
+                    onclick="openFullImage('certs/Gemini Google certified.pdf', 'Google Gemini AI Certification')">
+                    <div class="pdf-thumbnail">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Google Gemini AI</span>
+                    </div>
+                    <p>Google Gemini AI</p>
                 </div>
 
-                <!-- Industry 4.0 -->
-                <div class="gallery-item interactive-card" data-full-img="certs/industry-4.jpg"
-                    onclick="openFullImage('certs/industry-4.jpg', 'Industrial 4.0 & IIoT')">
-                    <img src="certs/industry-4.jpg" alt="Industry 4.0" loading="lazy">
-                    <p>Industrial 4.0 & IIoT</p>
+                <!-- NextWave Disruptive Technology -->
+                <div class="gallery-item interactive-card" data-full-img="certs/NextWave.jpg"
+                    onclick="openFullImage('certs/NextWave.jpg', 'NextWave Disruptive Technology')">
+                    <img src="certs/NextWave.jpg" alt="NextWave" loading="lazy">
+                    <p>NextWave Technology</p>
                 </div>
 
-                <!-- Microsensors -->
-                <div class="gallery-item interactive-card" data-full-img="certs/micro-sensors.jpg"
-                    onclick="openFullImage('certs/micro-sensors.jpg', 'Microsensors & Nanosensors')">
-                    <img src="certs/micro-sensors.jpg" alt="Microsensors" loading="lazy">
-                    <p>Microsensors & Nanosensors</p>
+                <!-- NPTEL Microsensors -->
+                <div class="gallery-item interactive-card"
+                    data-full-img="certs/nptel/23EC103 Microsensors and Nanosensor .pdf"
+                    onclick="openFullImage('certs/nptel/23EC103 Microsensors and Nanosensor .pdf', 'NPTEL: Microsensors and Nanosensors')">
+                    <div class="pdf-thumbnail nptel-theme">
+                        <i class="fas fa-microchip"></i>
+                        <span>NPTEL Microsensors</span>
+                    </div>
+                    <p>NPTEL: Microsensors and Nanosensors</p>
                 </div>
 
-                <!-- HackerRank Java -->
-                <div class="gallery-item interactive-card" data-full-img="certs/hackerrank-java.jpg"
-                    onclick="openFullImage('certs/hackerrank-java.jpg', 'HackerRank Java Basics')">
-                    <img src="certs/hackerrank-java.jpg" alt="Java Basics" loading="lazy">
-                    <p>HackerRank Java Basics</p>
+                <!-- NPTEL IoT 4.0 -->
+                <div class="gallery-item interactive-card" data-full-img="certs/nptel/23EC103 (1).pdf"
+                    onclick="openFullImage('certs/nptel/23EC103 (1).pdf', 'NPTEL: Industrial IoT 4.0')">
+                    <div class="pdf-thumbnail nptel-theme">
+                        <i class="fas fa-industry"></i>
+                        <span>NPTEL IoT 4.0</span>
+                    </div>
+                    <p>NPTEL: introduction to industry 4.0 and industrial internet of things</p>
                 </div>
 
-                <!-- Excel -->
-                <div class="gallery-item interactive-card" data-full-img="certs/excel-coursera.jpg"
-                    onclick="openFullImage('certs/excel-coursera.jpg', 'Microsoft Excel (Coursera)')">
-                    <img src="certs/excel-coursera.jpg" alt="Excel" loading="lazy">
+                <!-- Saylor Academy -->
+                <div class="gallery-item interactive-card" data-full-img="certs/7578527755SR.pdf"
+                    onclick="openFullImage('certs/7578527755SR.pdf', 'Saylor Academy Professional Certificate')">
+                    <div class="pdf-thumbnail saylor-theme">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Saylor Academy</span>
+                    </div>
+                    <p>Saylor Academy</p>
+                </div>
+
+                <!-- EF Presentation -->
+                <div class="gallery-item interactive-card" data-full-img="certs/EF.jpg"
+                    onclick="openFullImage('certs/EF.jpg', 'Effective Presentation')">
+                    <img src="certs/EF.jpg" alt="EF" loading="lazy">
+                    <p>Effective Presentation</p>
+                </div>
+
+                <!-- Microsoft Excel -->
+                <div class="gallery-item interactive-card" data-full-img="certs/Coursera C5AJO72GKH06.pdf"
+                    onclick="openFullImage('certs/Coursera C5AJO72GKH06.pdf', 'Microsoft Excel Certification')">
+                    <div class="pdf-thumbnail excel-theme">
+                        <i class="fas fa-file-excel"></i>
+                        <span>Microsoft Excel</span>
+                    </div>
                     <p>Microsoft Excel</p>
                 </div>
 
-                <!-- SQL -->
-                <div class="gallery-item interactive-card" data-full-img="certs/sql-db.jpg"
-                    onclick="openFullImage('certs/sql-db.jpg', 'SQL & Database Design')">
-                    <img src="certs/sql-db.jpg" alt="SQL" loading="lazy">
-                    <p>SQL & Database Design</p>
+                <!-- Udemy CSS & JavaScript -->
+                <div class="gallery-item interactive-card" data-full-img="certs/Udemy- Css and javaScript.pdf"
+                    onclick="openFullImage('certs/Udemy- Css and javaScript.pdf', 'Udemy: CSS and JavaScript Complete Course')">
+                    <div class="pdf-thumbnail udemy-theme">
+                        <i class="fab fa-js"></i>
+                        <span>CSS & JavaScript</span>
+                    </div>
+                    <p>Udemy: CSS & JavaScript</p>
                 </div>
 
-                <!-- MATLAB -->
-                <div class="gallery-item interactive-card" data-full-img="certs/matlab.jpg"
-                    onclick="openFullImage('certs/matlab.jpg', 'MATLAB & Simulink')">
-                    <img src="certs/matlab.jpg" alt="MATLAB" loading="lazy">
-                    <p>MATLAB & Simulink</p>
+                <!-- SQL Technical Achievement -->
+                <div class="gallery-item interactive-card" data-full-img="certs/sql/photo_2026-02-17_23-10-08.jpg"
+                    onclick="openFullImage('certs/sql/photo_2026-02-17_23-10-08.jpg', 'Technical Achievement - SQL')">
+                    <img src="certs/sql/photo_2026-02-17_23-10-08.jpg" alt="SQL Tech" loading="lazy">
+                    <p>Technical Achievement - SQL</p>
                 </div>
 
-                <!-- VLSI -->
-                <div class="gallery-item interactive-card" data-full-img="certs/vlsi.jpg"
-                    onclick="openFullImage('certs/vlsi.jpg', 'VLSI (Maven Silicon)')">
-                    <img src="certs/vlsi.jpg" alt="VLSI" loading="lazy">
-                    <p>VLSI (Maven Silicon)</p>
+                <!-- SQL Professional Achievement -->
+                <div class="gallery-item interactive-card" data-full-img="certs/sql/photo_2026-02-17_23-10-36.jpg"
+                    onclick="openFullImage('certs/sql/photo_2026-02-17_23-10-36.jpg', 'Professional Achievement - SQL')">
+                    <img src="certs/sql/photo_2026-02-17_23-10-36.jpg" alt="SQL Prof" loading="lazy">
+                    <p>Professional Achievement - SQL</p>
                 </div>
 
                 <!-- Add More Placeholder -->
@@ -633,7 +672,6 @@
                         <i class="fas fa-plus"></i>
                     </div>
                     <p>Add More Certificate</p>
-                    <!-- User requested: "add more certficate in each certificates with there name down.. " actually maybe they mean inside the gallery view. "inside there is add more certficate" -->
                 </div>
             </div>
         </div>

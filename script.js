@@ -350,18 +350,35 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentMediaList = [];
     let currentIndex = 0;
 
+    const modalLoader = document.getElementById('modal-loader');
+    const modalPdf = document.getElementById('modal-pdf');
+
+    // Hide loader when asset is ready
+    if (modalImg) modalImg.onload = () => { if (modalLoader) modalLoader.style.display = 'none'; };
+    if (modalPdf) modalPdf.onload = () => { if (modalLoader) modalLoader.style.display = 'none'; };
+    if (modalVideo) modalVideo.oncanplay = () => { if (modalLoader) modalLoader.style.display = 'none'; };
+
     const updateModalMedia = () => {
         const currentSrc = currentMediaList[currentIndex];
         const isVideo = currentSrc.toLowerCase().endsWith('.mp4');
+        const isPDF = currentSrc.toLowerCase().endsWith('.pdf');
 
+        // Reset display states and show loader
+        if (modalLoader) modalLoader.style.display = 'flex';
         modalImg.style.display = 'none';
         modalVideo.style.display = 'none';
+        if (modalPdf) modalPdf.style.display = 'none';
         modalVideo.pause();
 
         if (isVideo) {
             modalVideo.src = currentSrc;
             modalVideo.style.display = 'block';
-            modalVideo.play();
+            modalVideo.load(); // Better for refreshing sources
+        } else if (isPDF) {
+            if (modalPdf) {
+                modalPdf.src = currentSrc;
+                modalPdf.style.display = 'block';
+            }
         } else {
             modalImg.src = currentSrc;
             modalImg.style.display = 'block';
@@ -668,7 +685,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // 🩹 Compatibility Helper: Define openFullImage to prevent errors from static HTML onclicks
     // The actual logic is handled by the event listeners above.
     window.openFullImage = function (src, title) {
-        console.log('Opening via legacy onclick (handled by listener):', title);
+        currentMediaList = [src];
+        currentIndex = 0;
+        modal.style.display = "block";
+        modalTitle.textContent = title;
+        document.body.style.overflow = 'hidden';
+        updateModalMedia();
     };
 
     // 🌟 Info Grid Horizontal Scroll (Desktop)
