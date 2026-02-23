@@ -33,44 +33,58 @@ document.addEventListener('DOMContentLoaded', () => {
     let isMagnetic = false;
     let magneticTarget = null;
 
-    // Track mouse position
+    // Consolidated Mouse position tracking
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        createTrail(mouseX, mouseY);
+
+        // Create trail particles with controlled frequency (Adjusted for better visibility)
+        if (Math.random() > 0.8) {
+            createTrail(mouseX, mouseY);
+        }
     });
 
     // Handle clicking state
     window.addEventListener('mousedown', () => {
         isClicking = true;
-        cursorDot.classList.add('active');
-        cursorOutline.classList.add('active');
+        if (cursorDot) cursorDot.classList.add('active');
+        if (cursorOutline) cursorOutline.classList.add('active');
     });
 
     window.addEventListener('mouseup', () => {
         isClicking = false;
-        cursorDot.classList.remove('active');
-        cursorOutline.classList.remove('active');
+        if (cursorDot) cursorDot.classList.remove('active');
+        if (cursorOutline) cursorOutline.classList.remove('active');
     });
 
-    // Trail Particles Logic
+    // Optimized Trail Particles Logic (Using Element Pooling)
+    const MAX_TRAILS = 20; // Increased pool size
+    const trails = [];
+    for (let i = 0; i < MAX_TRAILS; i++) {
+        const trail = document.createElement('div');
+        trail.className = 'cursor-trail';
+        trail.style.opacity = '0';
+        trailContainer.appendChild(trail);
+        trails.push(trail);
+    }
+
+    let trailIndex = 0;
     const createTrail = (x, y) => {
-        if (Math.random() > 0.8) { // Only create sometimes for performance
-            const trail = document.createElement('div');
-            trail.className = 'cursor-trail';
-            trail.style.left = `${x}px`;
-            trail.style.top = `${y}px`;
-            trailContainer.appendChild(trail);
+        const trail = trails[trailIndex];
+        if (!trail) return;
+        trail.style.left = `${x}px`;
+        trail.style.top = `${y}px`;
 
-            const duration = 600;
-            trail.animate([
-                { transform: 'translate(-50%, -50%) scale(1)', opacity: 0.6 },
-                { transform: 'translate(-50%, -50%) scale(0)', opacity: 0 }
-            ], { duration, easing: 'ease-out' });
+        // Animation handles the opacity transition
+        trail.animate([
+            { transform: 'translate(-50%, -50%) scale(1)', opacity: 0.6 },
+            { transform: 'translate(-50%, -50%) scale(0)', opacity: 0 }
+        ], { duration: 600, easing: 'ease-out', fill: 'forwards' });
 
-            setTimeout(() => trail.remove(), duration);
-        }
+        trailIndex = (trailIndex + 1) % MAX_TRAILS;
     };
+
+    let magneticRect = null;
 
     // Main Animation Loop
     const animateCursor = () => {
@@ -79,9 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Magnetic Effect Logic
         if (isMagnetic && magneticTarget) {
-            const rect = magneticTarget.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
+            if (!magneticRect) {
+                magneticRect = magneticTarget.getBoundingClientRect();
+            }
+            const centerX = magneticRect.left + magneticRect.width / 2;
+            const centerY = magneticRect.top + magneticRect.height / 2;
 
             // Push towards center of the element
             targetX = centerX + (mouseX - centerX) * 0.3;
@@ -90,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
             outlineX += (centerX - outlineX) * 0.2;
             outlineY += (centerY - outlineY) * 0.2;
         } else {
+            magneticRect = null;
             outlineX += (mouseX - outlineX) * 0.15;
             outlineY += (mouseY - outlineY) * 0.15;
         }
@@ -112,36 +129,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Interactive Elements Handling
     const handleMouseOver = (e) => {
-        const el = e.target.closest('a, button, .social-btn, .project-card, .interactive-card, input, textarea, .antenna-card, .cert-item');
-        if (!el) {
+        const target = e.target;
+        if (!target) return;
+
+        // Find closest interactive parent
+        const interactiveEl = target.closest('a, button, .social-btn, .project-card, .interactive-card, .antenna-card, .cert-item');
+
+        // Find closest text element
+        const textEl = target.closest('input, textarea, p, h1, h2, h3, li, span');
+
+        if (!interactiveEl && !textEl) {
             resetCursorModes();
             return;
         }
 
+        resetCursorModes(); // Clear previous state before applying new one
+
         // Magnet for buttons/links/cards
-        if (el.matches('a, button, .social-btn, .project-card, .interactive-card, .antenna-card')) {
+        if (interactiveEl && (interactiveEl.matches('a, button, .social-btn, .project-card, .interactive-card, .antenna-card'))) {
             isMagnetic = true;
-            magneticTarget = el;
-            cursorOutline.classList.add('magnet');
+            magneticTarget = interactiveEl;
+            if (cursorOutline) cursorOutline.classList.add('magnet');
         }
 
-        // Text mode for inputs/textareas
-        if (el.matches('input, textarea, p, h1, h2, h3, li, span')) {
-            cursorDot.classList.add('text-mode');
-            cursorOutline.classList.add('text-mode');
+        // Text mode for inputs/textareas and readable elements
+        if (textEl) {
+            if (cursorDot) cursorDot.classList.add('text-mode');
+            if (cursorOutline) cursorOutline.classList.add('text-mode');
         }
 
         // View mode for images/gallery cards
-        if (el.matches('.project-card, .antenna-card, .cert-item')) {
-            cursorOutline.classList.add('view-mode');
+        if (interactiveEl && interactiveEl.matches('.project-card, .antenna-card, .cert-item, .gallery-item')) {
+            if (cursorOutline) cursorOutline.classList.add('view-mode');
         }
     };
+
 
     const resetCursorModes = () => {
         isMagnetic = false;
         magneticTarget = null;
-        cursorDot.classList.remove('text-mode');
-        cursorOutline.classList.remove('text-mode', 'magnet', 'view-mode');
+        if (cursorDot) cursorDot.classList.remove('text-mode');
+        if (cursorOutline) cursorOutline.classList.remove('text-mode', 'magnet', 'view-mode');
     };
 
     document.addEventListener('mouseover', handleMouseOver);
@@ -175,30 +203,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2500); // Reduced from 4s to 2.5s for snappier entry
     }
 
-    // 🎬 Cinematic Roadmap: Progress Line Animation (Optimized with Throttle)
+    // 🎬 Cinematic Roadmap: Progress Line Animation (Optimized)
     const journeyTimeline = document.querySelector('.journey-timeline');
     const lineFill = document.querySelector('.line-fill');
 
+    let timelineRect = null;
+    let isTimelineVisible = false;
+
+    // Cache rect on resize or when needed
+    const updateTimelineRect = () => {
+        if (journeyTimeline) timelineRect = journeyTimeline.getBoundingClientRect();
+    };
+
+    const timelineObserver = new IntersectionObserver((entries) => {
+        isTimelineVisible = entries[0].isIntersecting;
+        if (isTimelineVisible) updateTimelineRect();
+    }, { threshold: 0 });
+
+    if (journeyTimeline) timelineObserver.observe(journeyTimeline);
+    window.addEventListener('resize', throttle(updateTimelineRect, 200));
+
     function animateTimeline() {
-        if (!journeyTimeline || !lineFill) return;
+        if (!lineFill || !journeyTimeline) return;
 
         const rect = journeyTimeline.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
+        const viewportHeight = window.innerHeight;
 
-        if (rect.top > windowHeight || rect.bottom < 0) return; // Portability check
+        // Break if the timeline is completely out of view
+        if (rect.top > viewportHeight || rect.bottom < 0) return;
 
-        let progress = 0;
-        if (rect.top < windowHeight / 1.5) {
-            const totalHeight = rect.height;
-            const scrollIn = (windowHeight / 1.5) - rect.top;
-            progress = Math.min(Math.max((scrollIn / totalHeight) * 100, 0), 100);
-        }
+        const timelineHeight = rect.height;
+        // Calculate progress: 0% when top is at 80% viewport, 100% when top is high enough
+        const scrollIn = (viewportHeight * 0.8) - rect.top;
+        let progress = Math.min(Math.max((scrollIn / timelineHeight) * 100, 0), 100);
 
         lineFill.style.height = `${progress}%`;
     }
 
-    window.addEventListener('scroll', throttle(animateTimeline, 16));
-    animateTimeline();
+    window.addEventListener('scroll', throttle(animateTimeline, 15));
+    // Initial call after a delay to ensure layout is settled
+    setTimeout(animateTimeline, 1000);
 
     // 🌟 Theme Toggle
     const toggleSwitch = document.getElementById('theme-toggle');
@@ -667,18 +711,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log(`%c🚀 SKR-Sentinel Active`, 'color: #32e0c4; font-size: 20px; font-weight: bold;');
         console.log(`%cYour session is protected by a high-level security layer.`, 'color: #888;');
+        console.log(`%cDeveloped by Sanjiv Krishna R`, 'color: #3edbf0; font-style: italic;');
     };
 
-    // 📈 Scroll Progress Bar Logic
+    // 📈 Scroll Progress Bar Logic (Throttled)
     const scrollBar = document.getElementById('scrollBar');
-    window.addEventListener('scroll', () => {
+    const updateProgressBar = () => {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrolled = (winScroll / height) * 100;
         if (scrollBar) {
             scrollBar.style.width = scrolled + "%";
         }
-    });
+    };
+    window.addEventListener('scroll', throttle(updateProgressBar, 20));
 
     codeShield();
 
