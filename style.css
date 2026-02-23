@@ -3380,33 +3380,80 @@ body.light-mode #achievements .section-title {
 @media (max-width: 768px) {
     .gallery-content {
         padding: 25px 15px;
-        margin: 10% auto;
+        margin: 5% auto;
         width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
     }
 
     .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 12px;
     }
 
     .gallery-item img {
-        height: 100px;
+        height: 90px;
     }
 
     .gallery-item p {
-        font-size: 0.8rem;
-        padding: 10px;
+        font-size: 0.75rem;
+        padding: 8px;
     }
 
     .gallery-content h2 {
-        font-size: 1.5rem;
-        margin-bottom: 25px;
+        font-size: 1.4rem;
+        margin-bottom: 20px;
     }
 
     .close-gallery {
         top: 10px;
         right: 15px;
+        font-size: 24px;
     }
+
+    /* Viewer Modal Mobile Adjustments */
+    .modal-content {
+        padding: 20px 15px;
+        margin: 2% auto;
+        width: 98%;
+        border-radius: 16px;
+    }
+
+    #modal-title {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        padding: 0 30px;
+    }
+
+    .media-viewer {
+        min-height: 300px;
+        padding: 5px;
+    }
+
+    .media-viewer img,
+    .media-viewer video,
+    .media-viewer iframe {
+        max-height: 65vh;
+    }
+
+    #modal-pdf {
+        height: 60vh !important;
+    }
+
+    .close-modal {
+        top: 10px;
+        right: 15px;
+        font-size: 28px;
+    }
+}
+
+/* Ensure Single Viewer is ALWAYS on top of Gallery */
+#cert-modal {
+    z-index: 30000 !important;
+}
+
+#cert-gallery-modal {
+    z-index: 20000 !important;
 }
 
 .cisco-theme {

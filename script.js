@@ -397,10 +397,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalLoader = document.getElementById('modal-loader');
     const modalPdf = document.getElementById('modal-pdf');
 
-    // Hide loader when asset is ready
-    if (modalImg) modalImg.onload = () => { if (modalLoader) modalLoader.style.display = 'none'; };
-    if (modalPdf) modalPdf.onload = () => { if (modalLoader) modalLoader.style.display = 'none'; };
-    if (modalVideo) modalVideo.oncanplay = () => { if (modalLoader) modalLoader.style.display = 'none'; };
+    // Hide loader when asset is ready or handle errors
+    if (modalImg) {
+        modalImg.onload = () => { if (modalLoader) modalLoader.style.display = 'none'; };
+        modalImg.onerror = () => {
+            if (modalLoader) {
+                modalLoader.style.display = 'flex';
+                modalLoader.innerHTML = '<i class="fas fa-exclamation-triangle" style="font-size:2rem; color:var(--accent-color);"></i><p>Image failed to load</p>';
+            }
+        };
+    }
+
+    if (modalPdf) {
+        modalPdf.onload = () => { if (modalLoader) modalLoader.style.display = 'none'; };
+        modalPdf.onerror = () => {
+            if (modalLoader) {
+                modalLoader.style.display = 'flex';
+                modalLoader.innerHTML = '<i class="fas fa-file-pdf" style="font-size:2rem; color:var(--accent-color);"></i><p>PDF rendering failed. <a href="' + modalPdf.src + '" target="_blank" style="color:var(--primary-color); text-decoration:underline;">Click here to open directly</a></p>';
+            }
+        };
+    }
+
+    if (modalVideo) {
+        modalVideo.oncanplay = () => { if (modalLoader) modalLoader.style.display = 'none'; };
+        modalVideo.onerror = () => {
+            if (modalLoader) {
+                modalLoader.style.display = 'flex';
+                modalLoader.innerHTML = '<i class="fas fa-video-slash" style="font-size:2rem; color:var(--accent-color);"></i><p>Video failed to load</p>';
+            }
+        };
+    }
 
     const updateModalMedia = () => {
         const currentSrc = currentMediaList[currentIndex];
@@ -408,7 +434,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const isPDF = currentSrc.toLowerCase().endsWith('.pdf');
 
         // Reset display states and show loader
-        if (modalLoader) modalLoader.style.display = 'flex';
+        if (modalLoader) {
+            modalLoader.style.display = 'flex';
+            modalLoader.innerHTML = '<div class="spinner"></div><p>Loading Asset...</p>';
+        }
         modalImg.style.display = 'none';
         modalVideo.style.display = 'none';
         if (modalPdf) modalPdf.style.display = 'none';
@@ -422,6 +451,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (modalPdf) {
                 modalPdf.src = currentSrc;
                 modalPdf.style.display = 'block';
+
+                // Extra helper for mobile PDF visibility
+                if (window.innerWidth <= 768) {
+                    if (modalLoader) {
+                        modalLoader.style.display = 'flex';
+                        modalLoader.innerHTML = '<i class="fas fa-file-pdf" style="font-size:2.5rem; margin-bottom:10px;"></i><p>PDF Viewer may not work on all mobile browsers.</p><a href="' + currentSrc + '" target="_blank" class="btn primary-btn" style="padding:10px 20px; font-size:0.9rem; margin-top:10px;">Open PDF in New Tab</a>';
+                    }
+                }
             }
         } else {
             modalImg.src = currentSrc;
@@ -439,28 +476,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const interactiveItems = document.querySelectorAll('.cert-item, .interactive-card');
+    // 🌟 Unified Media Modal Trigger (Handles Project Cards, Journey Items, and Gallery)
+    const handleCardClick = (e) => {
+        const item = e.currentTarget;
 
+        // 🛑 Prevent Opening Media Modal if it's the Cert Box Trigger (Main Gallery Opener)
+        if (item.id === 'cert-box') return;
+
+        e.stopPropagation();
+
+        const srcList = item.getAttribute('data-src-list');
+        const singleSrc = item.getAttribute('data-src') ||
+            item.getAttribute('data-cert') ||
+            item.getAttribute('data-full-img');
+
+        if (srcList) {
+            currentMediaList = srcList.split(',');
+        } else if (singleSrc) {
+            currentMediaList = [singleSrc];
+        } else {
+            return;
+        }
+
+        currentIndex = 0;
+
+        // Use a better title extraction logic
+        const titleElement = item.querySelector('h3') || item.querySelector('p');
+        modalTitle.textContent = titleElement ? titleElement.textContent : "Certificate / Asset";
+
+        modal.style.display = "block";
+        document.body.style.overflow = 'hidden';
+        updateModalMedia();
+    };
+
+    // Attach listeners to all interactive items
+    const interactiveItems = document.querySelectorAll('.cert-item, .interactive-card, .gallery-item');
     interactiveItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.stopPropagation();
-
-            // 🛑 Prevent Opening Media Modal if it's the Cert Box Trigger
-            if (item.id === 'cert-box') return;
-
-            const srcList = item.getAttribute('data-src-list');
-            const singleSrc = item.getAttribute('data-src') || item.getAttribute('data-cert') || item.getAttribute('data-full-img');
-
-            if (srcList) currentMediaList = srcList.split(',');
-            else if (singleSrc) currentMediaList = [singleSrc];
-            else return;
-
-            currentIndex = 0;
-            modal.style.display = "block";
-            modalTitle.textContent = item.querySelector('h3') ? item.querySelector('h3').textContent : (item.querySelector('p') ? item.querySelector('p').textContent : item.textContent);
-            document.body.style.overflow = 'hidden';
-            updateModalMedia();
-        });
+        item.addEventListener('click', handleCardClick);
     });
 
     // 🌟 Certifications Gallery Modal Logic
@@ -728,8 +780,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     codeShield();
 
-    // 🩹 Compatibility Helper: Define openFullImage to prevent errors from static HTML onclicks
-    // The actual logic is handled by the event listeners above.
+    // 🩹 Compatibility Helper: Define openFullImage to prevent errors if still called from anywhere
     window.openFullImage = function (src, title) {
         currentMediaList = [src];
         currentIndex = 0;
