@@ -3745,4 +3745,30 @@ body.light-mode #achievements .section-title {
     background: var(--primary-color);
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(50, 224, 196, 0.4);
+}
+
+/* ========================= */
+/* 🌟 Custom Navbar Link Colors */
+/* ========================= */
+.nav-home {
+    color: #2ecc71 !important; /* Green */
+}
+
+.nav-about {
+    background: linear-gradient(90deg, #ff416c, #ff4b2b) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    color: transparent !important; /* Red mix */
+}
+
+.nav-projects {
+    color: #3498db !important; /* Blue */
+}
+
+.nav-internship {
+    color: #e6c280 !important; /* Sandel */
+}
+
+.nav-contact {
+    color: #9b59b6 !important; /* Violet */
 }
