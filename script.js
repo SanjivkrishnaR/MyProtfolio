@@ -501,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentIndex = 0;
 
         // Use a better title extraction logic
-        const titleElement = item.querySelector('h3') || item.querySelector('p');
+        const titleElement = item.querySelector('h3') || item.querySelector('p') || item.querySelector('.cert-name-mini');
         modalTitle.textContent = titleElement ? titleElement.textContent : "Certificate / Asset";
 
         modal.style.display = "block";
@@ -510,19 +510,24 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Attach listeners to all interactive items
-    const interactiveItems = document.querySelectorAll('.cert-item, .interactive-card, .gallery-item');
+    const interactiveItems = document.querySelectorAll('.cert-item, .interactive-card, .cert-card, .cert-item-mini');
     interactiveItems.forEach(item => {
-        item.addEventListener('click', handleCardClick);
+        item.addEventListener('click', (e) => {
+            if (item.classList.contains('interactive-card') || item.classList.contains('cert-item-mini') || item.classList.contains('cert-card')) {
+                e.stopPropagation(); // Prevent opening gallery when clicking specific card
+                handleCardClick(e);
+            }
+        });
     });
 
     // 🌟 Certifications Gallery Modal Logic
-    const certBox = document.getElementById('cert-box');
+    const certTrigger = document.getElementById('cert-box');
     const certGalleryModal = document.getElementById('cert-gallery-modal');
     const closeGalleryBtn = document.querySelector('.close-gallery');
 
-    if (certBox && certGalleryModal) {
-        certBox.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent bubbling layout issues
+    if (certTrigger && certGalleryModal) {
+        certTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
             certGalleryModal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         });

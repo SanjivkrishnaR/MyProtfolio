@@ -218,15 +218,12 @@
                             </ul>
                         </div>
 
-                        <!-- 2. Certifications Trigger -->
-                        <div class="info-card cert-card-trigger" id="cert-box">
-                            <div class="trigger-content">
-                                <h3><i class="fas fa-certificate"></i> View Certifications</h3>
-                                <p>Click to explore my professional achievements and digital assets.</p>
-                            </div>
-                            <div class="trigger-icon">
-                                <i class="fas fa-arrow-right"></i>
-                            </div>
+                        <!-- 2. Certifications -->
+                        <div class="info-card cert-card interactive-card" id="cert-box">
+                            <h3><i class="fas fa-certificate"></i> Certifications</h3>
+                            <p class="cert-preview-text">View all my professional certifications and achievements.</p>
+                            <button class="view-gallery-btn">Open Gallery <i
+                                    class="fas fa-external-link-alt"></i></button>
                         </div>
 
                         <!-- 3. Skills -->
@@ -583,131 +580,104 @@
         <div class="modal-content gallery-content animate-zoom">
             <span class="close-modal close-gallery">&times;</span>
             <h2>My Certifications Gallery</h2>
-            <div class="cert-grid">
+            <div class="gallery-grid">
                 <!-- CCNA Certificate -->
-                <div class="cert-card interactive-card" data-full-img="certs/CCNA 201-300.pdf">
-                    <div class="cert-img-wrapper">
-                        <img src="certs/placeholder.png" alt="CCNA" class="cert-img">
+                <div class="gallery-item" data-full-img="certs/CCNA 201-300.pdf">
+                    <div class="pdf-thumbnail cisco-theme">
+                        <i class="fas fa-network-wired"></i>
+                        <span>CCNA 201-300</span>
                     </div>
-                    <div class="cert-info">
-                        <h4>CCNA</h4>
-                        <p>Cisco Certified Network Associate</p>
-                    </div>
+                    <p>CCNA: Cisco Certified Network Associate</p>
                 </div>
 
                 <!-- Gemini Google Certified -->
-                <div class="cert-card interactive-card" data-full-img="certs/Gemini Google certified.pdf">
-                    <div class="cert-img-wrapper">
-                        <img src="certs/placeholder.png" alt="Google Gemini" class="cert-img">
+                <div class="gallery-item" data-full-img="certs/Gemini Google certified.pdf">
+                    <div class="pdf-thumbnail">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Google Gemini AI</span>
                     </div>
-                    <div class="cert-info">
-                        <h4>Google Gemini AI</h4>
-                        <p>GenAI Professional Certification</p>
-                    </div>
+                    <p>Google Gemini AI</p>
                 </div>
 
                 <!-- NextWave Disruptive Technology -->
-                <div class="cert-card interactive-card" data-full-img="certs/NextWave.jpg">
-                    <div class="cert-img-wrapper">
-                        <img src="certs/NextWave.jpg" alt="NextWave" class="cert-img">
-                    </div>
-                    <div class="cert-info">
-                        <h4>NextWave</h4>
-                        <p>Technology Fundamental Certification</p>
-                    </div>
+                <div class="gallery-item" data-full-img="certs/NextWave.jpg">
+                    <img src="certs/NextWave.jpg" alt="NextWave" loading="lazy">
+                    <p>NextWave Technology</p>
                 </div>
 
                 <!-- NPTEL Microsensors -->
-                <div class="cert-card interactive-card" data-full-img="certs/nptel/23EC103 Microsensors and Nanosensor .pdf">
-                    <div class="cert-img-wrapper">
-                        <img src="certs/placeholder.png" alt="NPTEL Microsensors" class="cert-img">
+                <div class="gallery-item" data-full-img="certs/nptel/23EC103 Microsensors and Nanosensor .pdf">
+                    <div class="pdf-thumbnail nptel-theme">
+                        <i class="fas fa-microchip"></i>
+                        <span>NPTEL Microsensors</span>
                     </div>
-                    <div class="cert-info">
-                        <h4>NPTEL</h4>
-                        <p>Microsensors and Nanosensors</p>
-                    </div>
+                    <p>NPTEL: Microsensors and Nanosensors</p>
                 </div>
 
                 <!-- NPTEL IoT 4.0 -->
-                <div class="cert-card interactive-card" data-full-img="certs/nptel/23EC103 (1).pdf">
-                    <div class="cert-img-wrapper">
-                        <img src="certs/placeholder.png" alt="NPTEL IoT" class="cert-img">
+                <div class="gallery-item" data-full-img="certs/nptel/23EC103 (1).pdf">
+                    <div class="pdf-thumbnail nptel-theme">
+                        <i class="fas fa-industry"></i>
+                        <span>NPTEL IoT 4.0</span>
                     </div>
-                    <div class="cert-info">
-                        <h4>NPTEL</h4>
-                        <p>Industry 4.0 & Industrial IoT</p>
-                    </div>
+                    <p>NPTEL: introduction to industry 4.0 and industrial internet of things</p>
                 </div>
 
                 <!-- Saylor Academy -->
-                <div class="cert-card interactive-card" data-full-img="certs/7578527755SR.pdf">
-                    <div class="cert-img-wrapper">
-                        <img src="certs/placeholder.png" alt="Saylor Academy" class="cert-img">
+                <div class="gallery-item" data-full-img="certs/7578527755SR.pdf">
+                    <div class="pdf-thumbnail saylor-theme">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Saylor Academy</span>
                     </div>
-                    <div class="cert-info">
-                        <h4>Saylor Academy</h4>
-                        <p>Professional Development</p>
-                    </div>
+                    <p>Saylor Academy</p>
                 </div>
 
                 <!-- EF Presentation -->
-                <div class="cert-card interactive-card" data-full-img="certs/EF.jpg">
-                    <div class="cert-img-wrapper">
-                        <img src="certs/EF.jpg" alt="EF" class="cert-img">
-                    </div>
-                    <div class="cert-info">
-                        <h4>EF Presentation</h4>
-                        <p>Effective Presentation Skills</p>
-                    </div>
+                <div class="gallery-item" data-full-img="certs/EF.jpg">
+                    <img src="certs/EF.jpg" alt="EF" loading="lazy">
+                    <p>Effective Presentation</p>
                 </div>
 
                 <!-- Microsoft Excel -->
-                <div class="cert-card interactive-card" data-full-img="certs/Coursera C5AJO72GKH06.pdf">
-                    <div class="cert-img-wrapper">
-                        <img src="certs/placeholder.png" alt="Microsoft Excel" class="cert-img">
+                <div class="gallery-item" data-full-img="certs/Coursera C5AJO72GKH06.pdf">
+                    <div class="pdf-thumbnail excel-theme">
+                        <i class="fas fa-file-excel"></i>
+                        <span>Microsoft Excel</span>
                     </div>
-                    <div class="cert-info">
-                        <h4>Microsoft Excel</h4>
-                        <p>Data Management Certification</p>
-                    </div>
+                    <p>Microsoft Excel</p>
                 </div>
 
                 <!-- Udemy CSS & JavaScript -->
-                <div class="cert-card interactive-card" data-full-img="certs/Udemy- Css and javaScript.pdf">
-                    <div class="cert-img-wrapper">
-                        <img src="certs/placeholder.png" alt="Udemy" class="cert-img">
+                <div class="gallery-item" data-full-img="certs/Udemy- Css and javaScript.pdf">
+                    <div class="pdf-thumbnail udemy-theme">
+                        <i class="fab fa-js"></i>
+                        <span>CSS & JavaScript</span>
                     </div>
-                    <div class="cert-info">
-                        <h4>CSS & JavaScript</h4>
-                        <p>Web Development Fundamentals</p>
-                    </div>
+                    <p>Udemy: CSS & JavaScript</p>
                 </div>
 
                 <!-- SQL Technical Achievement -->
-                <div class="cert-card interactive-card" data-full-img="certs/sql/photo_2026-02-17_23-10-08.jpg">
-                    <div class="cert-img-wrapper">
-                        <img src="certs/sql/photo_2026-02-17_23-10-08.jpg" alt="SQL Tech" class="cert-img">
-                    </div>
-                    <div class="cert-info">
-                        <h4>SQL Technical</h4>
-                        <p>Achievement Award</p>
-                    </div>
+                <div class="gallery-item" data-full-img="certs/sql/photo_2026-02-17_23-10-08.jpg">
+                    <img src="certs/sql/photo_2026-02-17_23-10-08.jpg" alt="SQL Tech" loading="lazy">
+                    <p>Technical Achievement - SQL</p>
                 </div>
 
                 <!-- SQL Professional Achievement -->
-                <div class="cert-card interactive-card" data-full-img="certs/sql/photo_2026-02-17_23-10-36.jpg">
-                    <div class="cert-img-wrapper">
-                        <img src="certs/sql/photo_2026-02-17_23-10-36.jpg" alt="SQL Prof" class="cert-img">
+                <div class="gallery-item" data-full-img="certs/sql/photo_2026-02-17_23-10-36.jpg">
+                    <img src="certs/sql/photo_2026-02-17_23-10-36.jpg" alt="SQL Prof" loading="lazy">
+                    <p>Professional Achievement - SQL</p>
+                </div>
+
+                <!-- Add More Placeholder -->
+                <div class="gallery-item add-new-cert">
+                    <div class="add-icon">
+                        <i class="fas fa-plus"></i>
                     </div>
-                    <div class="cert-info">
-                        <h4>SQL Professional</h4>
-                        <p>Achievement Award</p>
-                    </div>
+                    <p>Add More Certificate</p>
                 </div>
             </div>
         </div>
     </div>
-
 
     <!-- Canvas Confetti (For Satisfaction!) -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
