@@ -1489,6 +1489,13 @@ body.light-mode .premium-bio {
     font-weight: 700;
 }
 
+.premium-bio {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
 .about-signature {
     margin-top: 40px;
     font-family: 'Poppins', sans-serif;
