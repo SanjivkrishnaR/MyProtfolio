@@ -3718,3 +3718,24 @@ body.light-mode #achievements .section-title {
         /* Override any grid margins */
     }
 }
+
+/* ========================= */
+/* 🌟 Tech Highlights */
+/* ========================= */
+.tech-highlight {
+    color: var(--primary-color);
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+    padding: 0 4px;
+    background: rgba(50, 224, 196, 0.1);
+    border-radius: 4px;
+    transition: all var(--transition-speed);
+}
+
+.tech-highlight:hover {
+    color: var(--bg-body);
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(50, 224, 196, 0.4);
+}
