@@ -115,12 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
         dotY += (mouseY - dotY) * 0.3;
 
         if (cursorDot) {
-            cursorDot.style.left = `${dotX}px`;
-            cursorDot.style.top = `${dotY}px`;
+            cursorDot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0)`;
         }
         if (cursorOutline) {
-            cursorOutline.style.left = `${outlineX}px`;
-            cursorOutline.style.top = `${outlineY}px`;
+            cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0)`;
         }
 
         requestAnimationFrame(animateCursor);
@@ -176,9 +174,78 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mouseout', (e) => {
         if (!e.relatedTarget) resetCursorModes();
     });
-});
 
-document.addEventListener('DOMContentLoaded', () => {
+    // --- About Section Slideshow Logic ---
+    // 📸 About Section Slideshow Logic
+    const initAboutSlideshow = () => {
+        const slides = document.querySelectorAll('.about-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const prevBtn = document.getElementById('prevSlide');
+        const nextBtn = document.getElementById('nextSlide');
+        
+        if (!slides.length) return;
+
+        let currentSlide = 0;
+        let slideInterval;
+        const intervalTime = 10000; // 10 seconds
+
+        const showSlide = (n) => {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(ind => ind.classList.remove('active'));
+            
+            currentSlide = (n + slides.length) % slides.length;
+            
+            slides[currentSlide].classList.add('active');
+            if (indicators[currentSlide]) indicators[currentSlide].classList.add('active');
+        };
+
+        const nextSlide = () => {
+            showSlide(currentSlide + 1);
+        };
+
+        const prevSlide = () => {
+            showSlide(currentSlide - 1);
+        };
+
+        const startInterval = () => {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, intervalTime);
+        };
+
+        const resetInterval = () => {
+            startInterval();
+        };
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                nextSlide();
+                resetInterval();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                prevSlide();
+                resetInterval();
+            });
+        }
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showSlide(index);
+                resetInterval();
+            });
+        });
+
+        // Start the slideshow
+        startInterval();
+    };
+
+    initAboutSlideshow();
+
     // 🎬 Netflix Style Intro Transition
     const introLoader = document.getElementById('intro-loader');
     const mainContent = document.querySelector('main');
@@ -240,7 +307,6 @@ document.addEventListener('DOMContentLoaded', () => {
         lineFill.style.height = `${progress}%`;
     }
 
-    window.addEventListener('scroll', throttle(animateTimeline, 15));
     // Initial call after a delay to ensure layout is settled
     setTimeout(animateTimeline, 1000);
 
@@ -293,7 +359,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    window.addEventListener('scroll', throttle(handleNavbarScroll, 50));
 
     if (menuBtn) {
         menuBtn.addEventListener('click', () => {
@@ -501,8 +566,13 @@ document.addEventListener('DOMContentLoaded', () => {
         currentIndex = 0;
 
         // Use a better title extraction logic
-        const titleElement = item.querySelector('h3') || item.querySelector('p') || item.querySelector('.cert-name-mini');
-        modalTitle.textContent = titleElement ? titleElement.textContent : "Certificate / Asset";
+        const titleElement = item.querySelector('h3') || item.querySelector('p') || item.querySelector('.cert-name-mini') || item.querySelector('span');
+        const issuerElement = item.querySelector('small');
+        
+        let titleText = titleElement ? titleElement.textContent : "Certificate / Asset";
+        if (issuerElement) titleText += ` - ${issuerElement.textContent}`;
+        
+        modalTitle.textContent = titleText;
 
         modal.style.display = "block";
         document.body.style.overflow = 'hidden';
@@ -627,37 +697,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error('IP Blocked');
                 }
 
-                // 🛡️ SKR-Sentinel Secured Credentials (Encrypted format to prevent scraping)
-                const _0xToken = ['AAGTnG2fMpM_V5EwjNiefg-AAy4_3gsn--Y', '8510397902:'].reverse().join('');
-                const _0xChat = ['697505', '6029'].join('');
-
-                if (_0xToken && _0xChat) {
-                    const message = `🚀 *New Visitor on Portfolio*\n\n` +
-                        `📍 *IP:* ${visitorInfo.ip}\n` +
-                        `🌍 *Location:* ${visitorInfo.city}, ${visitorInfo.country}\n` +
-                        `🏢 *ISP:* ${visitorInfo.isp}\n` +
-                        `📱 *Device:* ${visitorInfo.device.substring(0, 50)}...`;
-
-                    fetch(`https://api.telegram.org/bot${_0xToken}/sendMessage?chat_id=${_0xChat}&text=${encodeURIComponent(message)}&parse_mode=Markdown`);
-
-                    // 🔔 Track the exit
-                    localStorage.setItem('current_visitor_ip', visitorInfo.ip);
-                    localStorage.setItem('session_start', Date.now());
-
-                    window.addEventListener('beforeunload', () => {
-                        const duration = Math.round((Date.now() - localStorage.getItem('session_start')) / 1000);
-                        const exitMsg = `🚪 *Visitor Left Portfolio*\n\n` +
-                            `📍 *IP:* ${visitorInfo.ip}\n` +
-                            `⏱️ *Time Spent:* ${duration} seconds`;
-
-                        // Use Beacon for reliable exit tracking
-                        navigator.sendBeacon(`https://api.telegram.org/bot${_0xToken}/sendMessage?chat_id=${_0xChat}&text=${encodeURIComponent(exitMsg)}&parse_mode=Markdown`);
-                    });
-                }
-
-                console.log('SKR-Sentinel: Visitor Logged Successfully');
+                // 🛡️ SKR-Sentinel Secured System (Internal Monitoring)
+                localStorage.setItem('session_start', Date.now());
+                console.log('SKR-Sentinel: Internal Perimeter Monitoring Active');
+                console.log('SKR-Sentinel: Privacy First Mode - External Tracking Disabled');
             } catch (err) {
-                console.error('Sentinel Tracking Error:', err.message);
+                console.error('Sentinel Internal Error:', err.message);
             }
         }
     };
@@ -781,7 +826,13 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollBar.style.width = scrolled + "%";
         }
     };
-    window.addEventListener('scroll', throttle(updateProgressBar, 20));
+    // 🚀 Master Consolidated Scroll Handler
+    const masterScrollHandler = () => {
+        animateTimeline();
+        handleNavbarScroll();
+        updateProgressBar();
+    };
+    window.addEventListener('scroll', throttle(masterScrollHandler, 15), { passive: true });
 
     codeShield();
 
@@ -808,6 +859,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         btnScrollRight.addEventListener('click', () => {
             infoScrollContainer.scrollBy({ left: 350, behavior: 'smooth' });
+        });
+    }
+
+    // ---- CERT TRACK PAUSE ON HOVER ----
+    const certsTrack = document.getElementById('certs-track');
+    if (certsTrack) {
+        certsTrack.addEventListener('mouseenter', () => {
+            certsTrack.style.animationPlayState = 'paused';
+        });
+        certsTrack.addEventListener('mouseleave', () => {
+            certsTrack.style.animationPlayState = 'running';
         });
     }
 

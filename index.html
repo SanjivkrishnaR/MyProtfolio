@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    
     <!-- Primary Meta Tags -->
     <title>Sanjiv Krishna R | Portfolio - Front-End Developer & ECE Student</title>
     <meta name="title" content="Sanjiv Krishna R | Portfolio - Front-End Developer & ECE Student">
@@ -92,8 +92,7 @@
         <div class="container nav-container">
             <div class="logo">
                 <a href="#home">
-                    <img src="sanjiv_krishna.jpeg" alt="Sanjiv Krishna R"
-                        class="nav-profile-img">
+                    <img src="sanjiv_krishna.jpeg" alt="Sanjiv Krishna Portfolio Profile" class="nav-profile-img" loading="lazy" decoding="async">
                     <span>SK</span>
                 </a>
             </div>
@@ -134,10 +133,10 @@
                     </h2>
 
                     <div class="hero-buttons">
-                        <a href="#projects" class="btn primary-btn">View My Work</a>
+                        <a href="#projects" class="btn primary-btn">Explore Work</a>
                         <a href="SANJIV KRISHNA R Resume.pdf" class="btn resume-btn" target="_blank">Download CV <i
                                 class="fas fa-download"></i></a>
-                        <a href="#contact" class="btn secondary-btn">Contact Me</a>
+                        <a href="#contact" class="btn secondary-btn">Let's Connect</a>
                     </div>
                 </div>
             </div>
@@ -157,7 +156,20 @@
                     <!-- Image Side -->
                     <div class="about-image-side reveal-left">
                         <div class="premium-image-frame">
-                            <img src="sanjiv_krishna.jpeg" alt="Sanjiv Krishna R" id="profile-pic-premium">
+                            <div class="about-slideshow">
+                                <img src="sanjiv_krishna.jpeg" alt="Sanjiv Krishna R - Portfolio Hero" class="about-slide active" decoding="async">
+                                <img src="professional.jpg" alt="Sanjiv Krishna R - Professional Portrait" class="about-slide" loading="lazy" decoding="async">
+
+                                <button class="slide-arrow prev-arrow" id="prevSlide" aria-label="Previous Slide"><i
+                                        class="fas fa-chevron-left"></i></button>
+                                <button class="slide-arrow next-arrow" id="nextSlide" aria-label="Next Slide"><i
+                                        class="fas fa-chevron-right"></i></button>
+
+                                <div class="slide-indicators">
+                                    <span class="indicator active"></span>
+                                    <span class="indicator"></span>
+                                </div>
+                            </div>
                             <div class="frame-border"></div>
                             <div class="frame-glow"></div>
                         </div>
@@ -226,15 +238,6 @@
                         </div>
 
                         <!-- 2. Certifications Trigger -->
-                        <div class="info-card cert-card-trigger" id="cert-box">
-                            <div class="trigger-content">
-                                <h3><i class="fas fa-certificate"></i> View Certifications</h3>
-                                <p>Click to explore my professional achievements and digital assets.</p>
-                            </div>
-                            <div class="trigger-icon">
-                                <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </div>
 
                         <!-- 3. Skills -->
                         <div class="info-card skills-card">
@@ -288,6 +291,111 @@
 
 
 
+
+        <!-- CERTIFICATIONS -->
+        <section id="certs" class="section certs-section">
+            <div class="container text-center">
+                <div class="section-header">
+                    <h2 class="section-title">Certifications</h2>
+                </div>
+                <div class="certs-track-wrap">
+                    <div class="certs-track" id="certs-track">
+                        <div class="cert-item interactive-card" data-src="certs/CCNA 201-300.pdf">
+                            <div class="cert-icon"><i class="fas fa-network-wired"></i></div>
+                            <span>CCNA</span><small>Cisco</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/Gemini Google certified.pdf">
+                            <div class="cert-icon"><i class="fab fa-google"></i></div><span>Gemini
+                                AI</span><small>Google</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/NextWave.jpg">
+                            <div class="cert-icon"><i class="fas fa-wave-square"></i></div>
+                            <span>NextWave</span><small>Technology</small>
+                        </div>
+                        <div class="cert-item interactive-card"
+                            data-src="certs/nptel/23EC103 Microsensors and Nanosensor .pdf">
+                            <div class="cert-icon"><i class="fas fa-atom"></i></div>
+                            <span>Microsensors</span><small>NPTEL</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/nptel/23EC103 (1).pdf">
+                            <div class="cert-icon"><i class="fas fa-industry"></i></div><span>IoT
+                                4.0</span><small>NPTEL</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/7578527755SR.pdf">
+                            <div class="cert-icon"><i class="fas fa-book"></i></div><span>Saylor
+                                Academy</span><small>Professional</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/EF.jpg">
+                            <div class="cert-icon"><i class="fas fa-chalkboard-teacher"></i></div><span>EF
+                                Presentation</span><small>Skills</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/Coursera C5AJO72GKH06.pdf">
+                            <div class="cert-icon"><i class="fab fa-microsoft"></i></div>
+                            <span>Excel</span><small>Microsoft</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/Udemy- Css and javaScript.pdf">
+                            <div class="cert-icon"><i class="fas fa-code"></i></div><span>CSS &
+                                JS</span><small>Udemy</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/sql/photo_2026-02-17_23-10-08.jpg">
+                            <div class="cert-icon"><i class="fas fa-database"></i></div><span>SQL
+                                Tech</span><small>Achievement</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/sql/photo_2026-02-17_23-10-36.jpg">
+                            <div class="cert-icon"><i class="fas fa-database"></i></div><span>SQL
+                                Pro</span><small>Achievement</small>
+                        </div>
+                        <!-- Duplicates for infinite scroll -->
+                        <div class="cert-item interactive-card" data-src="certs/CCNA 201-300.pdf">
+                            <div class="cert-icon"><i class="fas fa-network-wired"></i></div>
+                            <span>CCNA</span><small>Cisco</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/Gemini Google certified.pdf">
+                            <div class="cert-icon"><i class="fab fa-google"></i></div><span>Gemini
+                                AI</span><small>Google</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/NextWave.jpg">
+                            <div class="cert-icon"><i class="fas fa-wave-square"></i></div>
+                            <span>NextWave</span><small>Technology</small>
+                        </div>
+                        <div class="cert-item interactive-card"
+                            data-src="certs/nptel/23EC103 Microsensors and Nanosensor .pdf">
+                            <div class="cert-icon"><i class="fas fa-atom"></i></div>
+                            <span>Microsensors</span><small>NPTEL</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/nptel/23EC103 (1).pdf">
+                            <div class="cert-icon"><i class="fas fa-industry"></i></div><span>IoT
+                                4.0</span><small>NPTEL</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/7578527755SR.pdf">
+                            <div class="cert-icon"><i class="fas fa-book"></i></div><span>Saylor
+                                Academy</span><small>Professional</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/EF.jpg">
+                            <div class="cert-icon"><i class="fas fa-chalkboard-teacher"></i></div><span>EF
+                                Presentation</span><small>Skills</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/Coursera C5AJO72GKH06.pdf">
+                            <div class="cert-icon"><i class="fab fa-microsoft"></i></div>
+                            <span>Excel</span><small>Microsoft</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/Udemy- Css and javaScript.pdf">
+                            <div class="cert-icon"><i class="fas fa-code"></i></div><span>CSS &
+                                JS</span><small>Udemy</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/sql/photo_2026-02-17_23-10-08.jpg">
+                            <div class="cert-icon"><i class="fas fa-database"></i></div><span>SQL
+                                Tech</span><small>Achievement</small>
+                        </div>
+                        <div class="cert-item interactive-card" data-src="certs/sql/photo_2026-02-17_23-10-36.jpg">
+                            <div class="cert-icon"><i class="fas fa-database"></i></div><span>SQL
+                                Pro</span><small>Achievement</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Projects Section -->
         <section id="projects" class="section projects-section">
             <div class="container">
@@ -327,15 +435,6 @@
                         </div>
                     </article>
 
-                    <article class="project-card reveal-up interactive-card" style="transition-delay: 0.6s">
-                        <div class="card-icon"><i class="fas fa-user-tie"></i></div>
-                        <div class="card-content">
-                            <h3>Personal Portfolio</h3>
-                            <p>A cinematic, fully responsive portfolio website featuring fluid animations, dark mode,
-                                and a custom security sentinel. Built with HTML, CSS, and JavaScript.</p>
-                            <a href="#home" class="view-more">Live Preview <i class="fas fa-external-link-alt"></i></a>
-                        </div>
-                    </article>
                 </div>
             </div>
         </section>
@@ -406,7 +505,7 @@
                         <div class="antenna-card interactive-card" data-type="image"
                             data-src="https://images.unsplash.com/photo-1551703599-6b3e8379aa8b?auto=format&fit=crop&q=80&w=1000">
                             <img src="https://images.unsplash.com/photo-1551703599-6b3e8379aa8b?auto=format&fit=crop&q=80&w=100"
-                                loading="lazy" style="display:none">
+                                alt="Slot Antenna Simulation View" loading="lazy" decoding="async" style="display:none">
                             <div class="antenna-badge">CST Studio</div>
                             <div class="antenna-icon"><i class="fas fa-wave-square"></i></div>
                             <h3>Slot Antenna Design</h3>
@@ -549,10 +648,20 @@
 
     <footer>
         <div class="container footer-content">
-            <p>&copy; 2026 Sanjiv Krishna R. <i class="fas fa-heart"></i> </p>
-            <div class="protected-badge">
-                <i class="fas fa-shield-halved"></i>
-                <span>Protected by SKR-Sentinel Security Bot</span>
+            <div class="footer-logo-part">
+                <img src="sk-logo-gold-v2.png" alt="Sanjiv Krishna R Branding Logo" class="footer-skr-logo" loading="lazy" decoding="async">
+                <div class="footer-brand-wrapper">
+                    <span class="footer-brand">Sanjiv Krishna R</span>
+                    <div class="footer-signature">SKR</div>
+                </div>
+            </div>
+            
+            <div class="footer-info-part">
+                <p class="copyright-text">&copy; 2026 Sanjiv Krishna R. <i class="fas fa-heart"></i></p>
+                <div class="protected-badge">
+                    <i class="fas fa-shield-halved"></i>
+                    <span>Protected by SKR-Sentinel Security Bot</span>
+                </div>
             </div>
         </div>
     </footer>
