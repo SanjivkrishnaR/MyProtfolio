@@ -4169,6 +4169,10 @@ body.light-mode #achievements .section-title {
         z-index: 999;
     }
 
+    .menu-btn {
+        display: flex;
+    }
+
     .nav-active {
         display: flex !important;
         animation: mobileMenuSlide 0.5s ease forwards;

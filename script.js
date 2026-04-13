@@ -22,30 +22,30 @@ const throttle = (func, limit) => {
 
 // 🖱️ Next-Level Custom Cursor Logic
 document.addEventListener('DOMContentLoaded', () => {
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorOutline = document.querySelector('.cursor-outline');
-    const trailContainer = document.body;
-
     // Device Check: Disable custom cursor on touch devices for better performance
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) return;
 
-    let mouseX = 0, mouseY = 0;
-    let dotX = 0, dotY = 0;
-    let outlineX = 0, outlineY = 0;
-    let isMagnetic = false;
-    let magneticTarget = null;
+    if (!isTouchDevice) {
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const trailContainer = document.body;
 
-    // Track Mouse Position
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        let mouseX = 0, mouseY = 0;
+        let dotX = 0, dotY = 0;
+        let outlineX = 0, outlineY = 0;
+        let isMagnetic = false;
+        let magneticTarget = null;
 
-        // Subtle Trail (Only when moving fast)
-        if (Math.random() > 0.85) {
-            createTrail(mouseX, mouseY);
-        }
-    });
+        // Track Mouse Position
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            // Subtle Trail (Only when moving fast)
+            if (Math.random() > 0.85) {
+                createTrail(mouseX, mouseY);
+            }
+        });
 
     // Handle Active States (Clicking)
     window.addEventListener('mousedown', () => {
@@ -151,11 +151,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cursorOutline) cursorOutline.classList.remove('text-mode', 'magnet', 'view-mode');
     };
 
-    document.addEventListener('mouseover', handleMouseOver);
-    document.addEventListener('mouseout', (e) => {
-        if (!e.relatedTarget) resetCursorModes();
-    });
-
+        document.addEventListener('mouseover', handleMouseOver);
+        document.addEventListener('mouseout', (e) => {
+            if (!e.relatedTarget) resetCursorModes();
+        });
+    }
 
     // --- About Section Slideshow Logic ---
     // 📸 About Section Slideshow Logic
