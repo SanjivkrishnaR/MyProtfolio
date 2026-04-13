@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <!-- Primary Meta Tags -->
     <title>Sanjiv Krishna R | Portfolio - Front-End Developer & ECE Student</title>
     <meta name="title" content="Sanjiv Krishna R | Portfolio - Front-End Developer & ECE Student">
@@ -92,7 +92,8 @@
         <div class="container nav-container">
             <div class="logo">
                 <a href="#home">
-                    <img src="sanjiv_krishna.jpeg" alt="Sanjiv Krishna Portfolio Profile" class="nav-profile-img" loading="lazy" decoding="async">
+                    <img src="sanjiv_krishna.jpeg" alt="Sanjiv Krishna Portfolio Profile" class="nav-profile-img"
+                        loading="lazy" decoding="async">
                     <span>SK</span>
                 </a>
             </div>
@@ -157,8 +158,10 @@
                     <div class="about-image-side reveal-left">
                         <div class="premium-image-frame">
                             <div class="about-slideshow">
-                                <img src="sanjiv_krishna.jpeg" alt="Sanjiv Krishna R - Portfolio Hero" class="about-slide active" decoding="async">
-                                <img src="professional.jpg" alt="Sanjiv Krishna R - Professional Portrait" class="about-slide" loading="lazy" decoding="async">
+                                <img src="sanjiv_krishna.jpeg" alt="Sanjiv Krishna R - Portfolio Hero"
+                                    class="about-slide active" decoding="async">
+                                <img src="professional.jpg" alt="Sanjiv Krishna R - Professional Portrait"
+                                    class="about-slide" loading="lazy" decoding="async">
 
                                 <button class="slide-arrow prev-arrow" id="prevSlide" aria-label="Previous Slide"><i
                                         class="fas fa-chevron-left"></i></button>
@@ -216,25 +219,38 @@
 
                     <div class="info-grid reveal-up" id="infoGrid">
                         <!-- 1. Education -->
-                        <div class="info-card edu-card">
+                        <div class="info-card edu-card interactive-card" id="edu-trigger">
+                            <div class="card-glow"></div>
+                            <div class="premium-badge">Scholar</div>
                             <h3><i class="fas fa-graduation-cap"></i> Education </h3>
-                            <ul>
-                                <li>
-                                    <strong>B.E. Electronics and Communication</strong>
-                                    KPR Institute of Engineering and Technology, Coimbatore, Tamil Nadu<br>
-                                    <span class="edu-meta">2023 – 2027 | CGPA: 7.3</span>
-                                </li>
-                                <li>
-                                    <strong>HSLC - 12th</strong>
-                                    Chinmaya Vidyalaya Attukal, Thiruvananthapuram, Kerala<br>
-                                    <span class="edu-meta">2021 – 2022 | 73%</span>
-                                </li>
-                                <li>
-                                    <strong>SSLC - 10th</strong>
-                                    Chinmaya Vidyalaya Attukal, Thiruvananthapuram, Kerala<br>
-                                    <span class="edu-meta">2020 – 2021 | 70%</span>
-                                </li>
-                            </ul>
+                            <p class="edu-teaser">Click to view academic journey & scores</p>
+                            <div class="edu-preview">
+                                <span>B.E ECE</span>
+                                <span>2023–2027</span>
+                            </div>
+                            <span class="view-more-btn">Explore Journey <i class="fas fa-arrow-right"></i></span>
+
+                            <!-- Hidden Data for JS to grab -->
+                            <div class="edu-data-store" style="display:none;">
+                                <div class="edu-item">
+                                    <span class="year">2023 – 2027</span>
+                                    <span class="degree">B.E. Electronics and Communication</span>
+                                    <span class="inst">KPR Institute of Engineering and Technology, Coimbatore</span>
+                                    <span class="score">CGPA: 7.3</span>
+                                </div>
+                                <div class="edu-item">
+                                    <span class="year">2021 – 2022</span>
+                                    <span class="degree">HSLC - 12th Standard</span>
+                                    <span class="inst">Chinmaya Vidyalaya Attukal, Thiruvananthapuram</span>
+                                    <span class="score">Result: 73%</span>
+                                </div>
+                                <div class="edu-item">
+                                    <span class="year">2020 – 2021</span>
+                                    <span class="degree">SSLC - 10th Standard</span>
+                                    <span class="inst">Chinmaya Vidyalaya Attukal, Thiruvananthapuram</span>
+                                    <span class="score">Result: 70%</span>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- 2. Certifications Trigger -->
@@ -649,13 +665,14 @@
     <footer>
         <div class="container footer-content">
             <div class="footer-logo-part">
-                <img src="sk-logo-gold-v2.png" alt="Sanjiv Krishna R Branding Logo" class="footer-skr-logo" loading="lazy" decoding="async">
+                <img src="sk-logo-gold-v2.png" alt="Sanjiv Krishna R Branding Logo" class="footer-skr-logo"
+                    loading="lazy" decoding="async">
                 <div class="footer-brand-wrapper">
                     <span class="footer-brand">Sanjiv Krishna R</span>
                     <div class="footer-signature">SKR</div>
                 </div>
             </div>
-            
+
             <div class="footer-info-part">
                 <p class="copyright-text">&copy; 2026 Sanjiv Krishna R. <i class="fas fa-heart"></i></p>
                 <div class="protected-badge">
@@ -833,6 +850,21 @@
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
     <!-- JavaScript -->
+    <!-- Education Journey Modal -->
+    <div id="edu-modal" class="modal edu-modal-overlay">
+        <div class="modal-content edu-modal-content animate-zoom">
+            <span class="close-modal" id="close-edu-modal">&times;</span>
+            <div class="edu-modal-header">
+                <div class="edu-icon-wrap"><i class="fas fa-graduation-cap"></i></div>
+                <h2>Academic Foundation</h2>
+                <div class="edu-line"></div>
+            </div>
+            <div class="edu-timeline-container" id="edu-timeline">
+                <!-- Items will be injected by JS -->
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 

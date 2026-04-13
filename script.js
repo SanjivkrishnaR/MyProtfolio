@@ -26,39 +26,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const cursorOutline = document.querySelector('.cursor-outline');
     const trailContainer = document.body;
 
+    // Device Check: Disable custom cursor on touch devices for better performance
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) return;
+
     let mouseX = 0, mouseY = 0;
     let dotX = 0, dotY = 0;
     let outlineX = 0, outlineY = 0;
-    let isClicking = false;
     let isMagnetic = false;
     let magneticTarget = null;
 
-    // Consolidated Mouse position tracking
+    // Track Mouse Position
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
 
-        // Create trail particles with controlled frequency (Adjusted for better visibility)
-        if (Math.random() > 0.8) {
+        // Subtle Trail (Only when moving fast)
+        if (Math.random() > 0.85) {
             createTrail(mouseX, mouseY);
         }
     });
 
-    // Handle clicking state
+    // Handle Active States (Clicking)
     window.addEventListener('mousedown', () => {
-        isClicking = true;
         if (cursorDot) cursorDot.classList.add('active');
         if (cursorOutline) cursorOutline.classList.add('active');
     });
 
     window.addEventListener('mouseup', () => {
-        isClicking = false;
         if (cursorDot) cursorDot.classList.remove('active');
         if (cursorOutline) cursorOutline.classList.remove('active');
     });
 
-    // Optimized Trail Particles Logic (Using Element Pooling)
-    const MAX_TRAILS = 20; // Increased pool size
+    // Trail Particles Pool
+    const MAX_TRAILS = 15;
     const trails = [];
     for (let i = 0; i < MAX_TRAILS; i++) {
         const trail = document.createElement('div');
@@ -75,33 +76,23 @@ document.addEventListener('DOMContentLoaded', () => {
         trail.style.left = `${x}px`;
         trail.style.top = `${y}px`;
 
-        // Animation handles the opacity transition
         trail.animate([
-            { transform: 'translate(-50%, -50%) scale(1)', opacity: 0.6 },
+            { transform: 'translate(-50%, -50%) scale(1)', opacity: 0.4 },
             { transform: 'translate(-50%, -50%) scale(0)', opacity: 0 }
-        ], { duration: 600, easing: 'ease-out', fill: 'forwards' });
+        ], { duration: 500, easing: 'ease-out', fill: 'forwards' });
 
         trailIndex = (trailIndex + 1) % MAX_TRAILS;
     };
 
     let magneticRect = null;
 
-    // Main Animation Loop
+    // Smoothing Animation Loop
     const animateCursor = () => {
-        let targetX = mouseX;
-        let targetY = mouseY;
-
-        // Magnetic Effect Logic
+        // Target coordinates with slight lag for the outline
         if (isMagnetic && magneticTarget) {
-            if (!magneticRect) {
-                magneticRect = magneticTarget.getBoundingClientRect();
-            }
+            if (!magneticRect) magneticRect = magneticTarget.getBoundingClientRect();
             const centerX = magneticRect.left + magneticRect.width / 2;
             const centerY = magneticRect.top + magneticRect.height / 2;
-
-            // Push towards center of the element
-            targetX = centerX + (mouseX - centerX) * 0.3;
-            targetY = centerY + (mouseY - centerY) * 0.3;
 
             outlineX += (centerX - outlineX) * 0.2;
             outlineY += (centerY - outlineY) * 0.2;
@@ -111,57 +102,47 @@ document.addEventListener('DOMContentLoaded', () => {
             outlineY += (mouseY - outlineY) * 0.15;
         }
 
-        dotX += (mouseX - dotX) * 0.3;
-        dotY += (mouseY - dotY) * 0.3;
+        dotX += (mouseX - dotX) * 0.35;
+        dotY += (mouseY - dotY) * 0.35;
 
+        // FIXED: Added translate(-50%, -50%) to ensure cursor is centered on pointer
         if (cursorDot) {
-            cursorDot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0)`;
+            cursorDot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
         }
         if (cursorOutline) {
-            cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0)`;
+            cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
         }
 
         requestAnimationFrame(animateCursor);
     };
     requestAnimationFrame(animateCursor);
 
-    // Interactive Elements Handling
+    // Context-Aware Cursor Modes
     const handleMouseOver = (e) => {
         const target = e.target;
         if (!target) return;
 
-        // Find closest interactive parent
-        const interactiveEl = target.closest('a, button, .social-btn, .project-card, .interactive-card, .antenna-card, .cert-item');
+        const interactiveEl = target.closest('a, button, .social-btn, .project-card, .cert-item, .interactive-card');
+        const inputEl = target.closest('input, textarea');
 
-        // Find closest text element
-        const textEl = target.closest('input, textarea, p, h1, h2, h3, li, span');
+        resetCursorModes();
 
-        if (!interactiveEl && !textEl) {
-            resetCursorModes();
-            return;
-        }
-
-        resetCursorModes(); // Clear previous state before applying new one
-
-        // Magnet for buttons/links/cards
-        if (interactiveEl && (interactiveEl.matches('a, button, .social-btn, .project-card, .interactive-card, .antenna-card'))) {
+        if (interactiveEl) {
             isMagnetic = true;
             magneticTarget = interactiveEl;
-            if (cursorOutline) cursorOutline.classList.add('magnet');
+            if (cursorOutline) {
+                cursorOutline.classList.add('magnet');
+                if (interactiveEl.matches('.project-card, .cert-item, .interactive-card')) {
+                    cursorOutline.classList.add('view-mode');
+                }
+            }
         }
 
-        // Text mode for inputs/textareas and readable elements
-        if (textEl) {
+        if (inputEl) {
             if (cursorDot) cursorDot.classList.add('text-mode');
             if (cursorOutline) cursorOutline.classList.add('text-mode');
         }
-
-        // View mode for images/gallery cards
-        if (interactiveEl && interactiveEl.matches('.project-card, .antenna-card, .cert-item, .gallery-item')) {
-            if (cursorOutline) cursorOutline.classList.add('view-mode');
-        }
     };
-
 
     const resetCursorModes = () => {
         isMagnetic = false;
@@ -174,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mouseout', (e) => {
         if (!e.relatedTarget) resetCursorModes();
     });
+
 
     // --- About Section Slideshow Logic ---
     // 📸 About Section Slideshow Logic
@@ -873,5 +855,69 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-});
+    // 🎓 Education Modal Logic
+    const eduTrigger = document.getElementById("edu-trigger");
+    const eduModal = document.getElementById("edu-modal");
+    const closeEduBtn = document.getElementById("close-edu-modal");
+    const eduTimeline = document.getElementById("edu-timeline");
 
+    if (eduTrigger && eduModal) {
+        eduTrigger.addEventListener("click", () => {
+            const dataStore = eduTrigger.querySelector(".edu-data-store");
+            const items = dataStore.querySelectorAll(".edu-item");
+            
+            eduTimeline.innerHTML = "";
+            items.forEach((item, index) => {
+                const year = item.querySelector(".year").textContent;
+                const degree = item.querySelector(".degree").textContent;
+                const inst = item.querySelector(".inst").textContent;
+                const score = item.querySelector(".score").textContent;
+
+                const timelineItem = document.createElement("div");
+                timelineItem.className = "edu-timeline-item";
+                timelineItem.style.animationDelay = `${index * 0.15}s`;
+                timelineItem.innerHTML = `
+                    <div class="edu-year">${year}</div>
+                    <div class="edu-details animate-slide-in">
+                        <h4>${degree}</h4>
+                        <span class="edu-inst"><i class="fas fa-university"></i> ${inst}</span>
+                        <div class="edu-score-tag">
+                            <i class="fas fa-star"></i> ${score}
+                        </div>
+                    </div>
+                `;
+                eduTimeline.appendChild(timelineItem);
+            });
+
+            eduModal.style.display = "block";
+            document.body.style.overflow = "hidden";
+        });
+    }
+
+    if (closeEduBtn) {
+        closeEduBtn.addEventListener("click", () => {
+            eduModal.style.display = "none";
+            document.body.style.overflow = "auto";
+        });
+    }
+
+    // Close on outside click
+    window.addEventListener("click", (e) => {
+        if (e.target == eduModal) {
+            eduModal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+    });
+
+    // Interactive Glow Effect for Education Card
+    if (eduTrigger) {
+        eduTrigger.addEventListener("mousemove", (e) => {
+            const rect = eduTrigger.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            eduTrigger.style.setProperty("--mouse-x", `${x}px`);
+            eduTrigger.style.setProperty("--mouse-y", `${y}px`);
+        });
+    }
+
+}); // End of DOMContentLoaded
