@@ -238,18 +238,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             introLoader.style.opacity = '0';
+            introLoader.style.backdropFilter = 'none';
+            introLoader.style.webkitBackdropFilter = 'none';
+            
             setTimeout(() => {
                 introLoader.style.display = 'none';
                 if (mainContent) {
                     mainContent.classList.remove('content-hidden');
                     mainContent.classList.add('content-visible');
+                    // Force a redraw to ensure blur is gone
+                    mainContent.style.transform = 'translateZ(0)';
                 }
                 if (navbarElement) {
                     navbarElement.style.opacity = '1';
                     navbarElement.style.transition = 'opacity 1s ease';
                 }
             }, 800);
-        }, 1500); // Reduced from 2.5s to 1.5s for faster entry
+        }, 1200); // Shorter delay for better UX on mobile
     }
 
     // 🎬 Cinematic Roadmap: Progress Line Animation (Optimized)
