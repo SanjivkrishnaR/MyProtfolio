@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     navbarElement.style.transition = 'opacity 1s ease';
                 }
             }, 800);
-        }, 2500); // Reduced from 4s to 2.5s for snappier entry
+        }, 1500); // Reduced from 2.5s to 1.5s for faster entry
     }
 
     // 🎬 Cinematic Roadmap: Progress Line Animation (Optimized)
@@ -689,12 +689,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Initialize Security Scan & Tracking
+    // Initialize Security Scan & Tracking (Backgrounded)
     window.addEventListener('load', () => {
-        securitySentinel.logVisitor();
-        setTimeout(() => {
-            securitySentinel.showStatus('SKR-Sentinel: System Secure & Monitoring Active', 'success');
-        }, 3000);
+        // Run non-critical background task
+        requestIdleCallback(() => {
+            securitySentinel.logVisitor();
+            setTimeout(() => {
+                securitySentinel.showStatus('SKR-Sentinel: Protected', 'success');
+            }, 5000);
+        });
     });
 
     // 🌟 Contact Form Handling (Enhanced with Security Bot)
@@ -816,7 +819,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     window.addEventListener('scroll', throttle(masterScrollHandler, 15), { passive: true });
 
-    codeShield();
+    // codeShield(); // Removed to improve performance and user freedom
 
     // 🩹 Compatibility Helper: Define openFullImage to prevent errors if still called from anywhere
     window.openFullImage = function (src, title) {
